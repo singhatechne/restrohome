@@ -529,6 +529,8 @@
             
             .dish-card .flex.items-center.border.border-gray-700.rounded-full.bg-gray-900 {
                 flex-shrink: 0 !important;
+                transform: scale(0.9);
+                margin-right: 0.25rem;
             }
             
             .dish-card .flex.justify-between.items-start {
@@ -549,6 +551,16 @@
             
             .dish-card .p-4 {
                 padding: 0.75rem !important;
+            }
+            
+            .dish-card .qty-btn {
+                width: 28px !important;
+                height: 28px !important;
+            }
+            
+            .dish-card .add-to-cart-btn {
+                padding: 4px 12px !important;
+                font-size: 0.7rem !important;
             }
         }
 
@@ -794,13 +806,12 @@
             background-color: #B91C1C !important;
         }
 
-      
         .nfd-container .sort-checkbox:checked,
         .nfd-container .dietary-checkbox:checked,
         .nfd-container #show-offers:checked,
-        .nfd-container #rating-4\\.0:checked,
-        .nfd-container #rating-3\\.5:checked,
-        .nfd-container #rating-3\\.0:checked {
+        .nfd-container #rating-4\.0:checked,
+        .nfd-container #rating-3\.5:checked,
+        .nfd-container #rating-3\.0:checked {
             accent-color: #DC2626 !important;
         }
 
@@ -815,7 +826,6 @@
             color: white !important;
         }
 
-        /* Changed halal to non-veg */
         .nfd-container .dietary-badge.non-veg {
             background-color: rgba(220, 38, 38, 0.2) !important;
             color: #FCA5A5 !important;
@@ -897,7 +907,6 @@
             color: #92400e !important;
         }
         
-        /* Custom classes to fix issues */
         .grayscale-0 {
             filter: grayscale(0);
         }
@@ -1238,7 +1247,6 @@
             font-size: 10px !important;
         }
         
-
         .nfd-search-container {
             width: 100%;
             max-width: 800px;
@@ -1303,7 +1311,6 @@
             object-fit: cover;
         }
         
-        /* New testimonial styles for mobile */
         @media (max-width: 768px) {
             .testimonial-slide {
                 min-width: 250px !important;
@@ -1316,7 +1323,6 @@
             }
         }
         
-        /* Scroll in animation for Mac & Cheese section */
         .scroll-in-animation {
             opacity: 0;
             transform: translateY(30px);
@@ -1328,7 +1334,6 @@
             transform: translateY(0);
         }
 
-        /* ===== NEW STYLES FOR DISH CARDS & CART ===== */
         .dish-card {
             background: #111111;
             border: 1px solid #333;
@@ -1383,7 +1388,6 @@
             transform: scale(1.03);
         }
         
-        /* Cart badge */
         .cart-badge {
             position: absolute;
             top: -8px;
@@ -1400,7 +1404,6 @@
             font-weight: bold;
         }
         
-        /* Table selector */
         .table-chip {
             background: #1e1e1e;
             border: 1px solid #444;
@@ -1419,7 +1422,6 @@
             color: white;
         }
         
-        /* Cart item buttons */
         .cart-inc, .cart-dec {
             width: 32px;
             height: 32px;
@@ -1447,19 +1449,16 @@
             }
         }
         
-        /* Ensure restaurant container shows dishes grid */
         #restaurants-container {
             display: grid !important;
         }
         
-        /* Restaurant header banner */
         .restaurant-banner {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
         }
         
-        /* Category filter styling */
         .category-filter {
             transition: all 0.3s ease;
         }
@@ -1469,7 +1468,6 @@
             color: white;
         }
 
-        /* Mobile slide to explore indicator */
         .slide-indicator {
             display: none;
         }
@@ -1496,6 +1494,129 @@
             
             .cuisine-scroll::-webkit-scrollbar {
                 display: none;
+            }
+        }
+        
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 9995;
+        }
+        
+        .fab-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #DC2626;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .fab-btn:hover {
+            transform: scale(1.1);
+            background: #B91C1C;
+        }
+        
+        .fab-label {
+            position: absolute;
+            right: 70px;
+            background: #111;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            border: 1px solid #333;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .fab-btn:hover .fab-label {
+            opacity: 1;
+        }
+        
+        .cart-action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        
+        .cart-action-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        
+        .waiter-btn {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .bill-btn {
+            background: #059669;
+            color: white;
+        }
+        
+        .waiter-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .bill-btn:hover {
+            background: #047857;
+        }
+        
+        @media (max-width: 768px) {
+            .fab-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            .fab-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            .fab-label {
+                right: 60px;
+                font-size: 12px;
+                padding: 4px 10px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .dish-card .flex.flex-col.flex-grow {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+            
+            .dish-card .flex.justify-between.items-start {
+                margin-bottom: 1rem;
+            }
+            
+            .dish-card .mt-auto {
+                margin-top: auto;
             }
         }
     </style>
@@ -1529,7 +1650,6 @@
             </ul>
 
             <div class="flex items-center space-x-4 md:space-x-6 relative">
-                <!-- CART ICON with badge -->
                 <button id="cart-icon-header" class="relative text-white hover:text-red-400 text-xl">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count-badge" class="cart-badge">0</span>
@@ -1743,6 +1863,147 @@
         </div>
     </div>
 
+    <!-- CALL WAITER MODAL -->
+    <div id="waiter-modal" class="modal-overlay">
+        <div class="modal-content p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold"><i class="fas fa-concierge-bell text-red-500 mr-3"></i> Call Waiter</h3>
+                <button id="close-waiter-modal" class="text-gray-400 hover:text-white text-2xl focus:outline-none">&times;</button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-300 mb-4">Please select your table and request:</p>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Table Number</label>
+                    <div class="flex flex-wrap gap-2" id="waiter-table-grid">
+                        <!-- Table chips will be injected here -->
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Select Request</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="radio" name="waiter-request" value="water" class="mr-3 accent-red-500" checked>
+                            <i class="fas fa-wine-bottle text-blue-400 mr-2"></i>
+                            <span>Bring Water Bottle</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="radio" name="waiter-request" value="beverage" class="mr-3 accent-red-500">
+                            <i class="fas fa-cocktail text-yellow-400 mr-2"></i>
+                            <span>Order Beverage</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="radio" name="waiter-request" value="cutlery" class="mr-3 accent-red-500">
+                            <i class="fas fa-utensils text-gray-400 mr-2"></i>
+                            <span>Extra Cutlery</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="radio" name="waiter-request" value="napkins" class="mr-3 accent-red-500">
+                            <i class="fas fa-toilet-paper text-green-400 mr-2"></i>
+                            <span>Napkins / Tissues</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="radio" name="waiter-request" value="spill" class="mr-3 accent-red-500">
+                            <i class="fas fa-broom text-orange-400 mr-2"></i>
+                            <span>Spill Clean-up</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="radio" name="waiter-request" value="other" class="mr-3 accent-red-500">
+                            <i class="fas fa-ellipsis-h text-gray-400 mr-2"></i>
+                            <span>Other (specify below)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Additional Notes</label>
+                    <textarea class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" rows="2" placeholder="e.g., Extra spicy, no onions..."></textarea>
+                </div>
+            </div>
+            
+            <div class="flex gap-3">
+                <button id="cancel-waiter-modal" class="flex-1 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-bold transition">Cancel</button>
+                <button id="submit-waiter-request" class="flex-1 py-3 bg-red-500 hover:bg-red-600 rounded-lg font-bold transition">Call Waiter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REQUEST BILL MODAL -->
+    <div id="bill-modal" class="modal-overlay">
+        <div class="modal-content p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold"><i class="fas fa-file-invoice-dollar text-red-500 mr-3"></i> Request Bill</h3>
+                <button id="close-bill-modal" class="text-gray-400 hover:text-white text-2xl focus:outline-none">&times;</button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-300 mb-4">Table: <span id="bill-table-display" class="font-bold text-red-500">Not selected</span></p>
+                
+                <!-- ADDED - Table Selection Grid for Bill Modal -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Select Table Number</label>
+                    <div class="flex flex-wrap gap-2" id="bill-table-grid">
+                        <!-- Table chips will be injected here -->
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Select Options</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="checkbox" id="bill-pack" class="mr-3 accent-red-500">
+                            <i class="fas fa-box text-amber-400 mr-2"></i>
+                            <span>Pack the dish (Parcel)</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="checkbox" id="bill-split" class="mr-3 accent-red-500">
+                            <i class="fas fa-divide text-blue-400 mr-2"></i>
+                            <span>Split Bill</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="checkbox" id="bill-feedback" class="mr-3 accent-red-500">
+                            <i class="fas fa-star text-yellow-400 mr-2"></i>
+                            <span>Leave Feedback</span>
+                        </label>
+                        <label class="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer">
+                            <input type="checkbox" id="bill-receipt" class="mr-3 accent-red-500">
+                            <i class="fas fa-receipt text-green-400 mr-2"></i>
+                            <span>Print Receipt</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="feedback-section" class="mb-4 hidden">
+                    <label class="block text-sm font-medium mb-2">Your Feedback</label>
+                    <textarea class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" rows="2" placeholder="How was your experience?"></textarea>
+                    <div class="flex gap-2 mt-2">
+                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                        <span class="text-gray-500"><i class="fas fa-star"></i></span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Payment Method</label>
+                    <select class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500">
+                        <option value="cash">Cash</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="mobile">Mobile Payment</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex gap-3">
+                <button id="cancel-bill-modal" class="flex-1 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-bold transition">Cancel</button>
+                <button id="submit-bill-request" class="flex-1 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-bold transition">Request Bill</button>
+            </div>
+        </div>
+    </div>
+
     <!-- CART MODAL -->
     <div id="cart-modal" class="modal-overlay">
         <div class="modal-content p-5 md:p-6 w-full max-w-md md:max-w-2xl">
@@ -1778,16 +2039,37 @@
                     <i class="fab fa-whatsapp text-xl"></i> Order via WhatsApp
                 </button>
             </div>
+            
+            <!-- Cart Action Buttons: Call Waiter & Request Bill - Updated to open modals -->
+            <div class="cart-action-buttons">
+                <button id="cart-call-waiter" class="cart-action-btn waiter-btn">
+                    <i class="fas fa-concierge-bell"></i> Call Waiter
+                </button>
+                <button id="cart-request-bill" class="cart-action-btn bill-btn">
+                    <i class="fas fa-file-invoice-dollar"></i> Request Bill
+                </button>
+            </div>
+            
             <p class="text-xs text-gray-500 mt-3 text-center">You'll be redirected to WhatsApp with your order summary.</p>
         </div>
     </div>
 
+    <!-- FLOATING ACTION BUTTONS (Call Waiter & Request Bill) -->
+    <div class="fab-container">
+        <button id="fab-waiter" class="fab-btn relative">
+            <i class="fas fa-concierge-bell"></i>
+            <span class="fab-label">Call Waiter</span>
+        </button>
+        <button id="fab-bill" class="fab-btn relative">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span class="fab-label">Request Bill</span>
+        </button>
+    </div>
+
     <section class="relative h-[70vh] md:h-screen flex items-center justify-center text-center px-4 md:px-6">
-        <!-- CHANGED: Replaced image with local video -->
         <div class="absolute inset-0 z-0">
             <video class="video-hero" autoplay muted loop playsinline>
                 <source src="assets/Restro Vid shrt.mp4" type="video/mp4">
-            
                 <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-60" alt="Hero Background">
             </video>
             <div class="absolute inset-0 hero-gradient"></div>
@@ -1813,7 +2095,6 @@
                     <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Indian">Indian</span>
                     <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Sushi">Sushi</span>
                     <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Pasta">Pasta</span>
-                    
                 </div>
             </div>
         </div>
@@ -1831,7 +2112,6 @@
             </div>
         </div>
 
-    
         <div class="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8" id="dishes-container">
             <div class="relative group cursor-pointer overflow-hidden rounded-2xl">
                 <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&q=80" class="w-full h-32 md:h-40 object-cover transition duration-500 group-hover:scale-110" alt="Chicken Dinner">
@@ -1879,7 +2159,6 @@
                 <a href="#" class="text-red-500 text-sm md:text-base font-medium hover:underline">View All</a>
             </div>
             
-            <!-- Smaller promo cards grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
                 <!-- Promo Card 1 -->
                 <div class="promo-card bg-gradient-to-r from-red-500/20 to-red-600/10 border border-red-500/30 p-4 md:p-6 flex flex-col">
@@ -1944,16 +2223,8 @@
         </div>
     </section>
 
-
     <!--  (Added to Explore More) -->
    <section class="py-24 bg-zinc-950 nfd-container" id="explore-more">
-        <!-- Search Bar at Top -->
-        <div class="nfd-search-container mb-10">
-            <div class="nfd-search-bar">
-                <input type="text" id="nfd-search-input" class="nfd-search-input" placeholder="Search dishes...">
-                <button id="nfd-search-button" class="nfd-search-button">Search</button>
-            </div>
-        </div>
         
         <!-- Restaurant Banner (Single Restaurant) -->
         <div class="container mx-auto px-4 sm:px-6 mb-8">
@@ -1969,11 +2240,17 @@
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+
+        <!-- Search Bar at Top -->
+        <div class="nfd-search-container mb-10">
+            <div class="nfd-search-bar">
+                <input type="text" id="nfd-search-input" class="nfd-search-input" placeholder="Search dishes...">
+                <button id="nfd-search-button" class="nfd-search-button">Search</button>
+            </div>
+        </div>
         
-        <!-- Category Filter Tabs -->
-        
-        
-        <!-- link from search -->
         <div class="container mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col lg:flex-row gap-6 sm:gap-8" id="restaurant-search-section">
             
             <aside id="sidebar" class="hidden lg:block w-full lg:w-64 flex-shrink-0 space-y-6 bg-[#111111] lg:bg-transparent p-4 lg:p-0 fixed lg:relative inset-0 z-40 overflow-y-auto lg:overflow-visible">
@@ -1983,19 +2260,13 @@
                     <button id="close-sidebar" class="text-gray-500"><i class="fas fa-times"></i></button>
                 </div>
 
-                
-
-                <!-- Enhanced Sort By with Multiple Selection -->
                 <div class="bg-[#111111] p-4 rounded-lg shadow-sm border border-gray-700">
                     <h3 class="font-bold text-gray-300 mb-4">Sort by (Multiple)</h3>
                     <div class="space-y-3">
-                     
-                        
                         <!-- Dietary Preferences -->
                         <div class="pt-2 mt-2 border-t border-gray-600">
                             <h4 class="text-xs font-semibold text-gray-500 mb-2">Dietary Preferences</h4>
                             
-                            <!-- non-veg -->
                             <label class="flex items-center cursor-pointer group">
                                 <input type="checkbox" name="dietary" value="non-veg" class="w-4 h-4 text-red-500 rounded focus:ring-red-500 border-gray-700 dietary-checkbox">
                                 <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500 flex items-center">
@@ -2040,7 +2311,6 @@
                         <div class="relative">
                             <input type="range" id="price-range" min="50" max="2000" value="2000" 
                                    class="w-full h-1 price-range-slider rounded-lg appearance-none cursor-pointer">
-                            <!-- Wider Price Tooltip -->
                             <div id="price-tooltip" class="absolute top-[-35px] transform -translate-x-1/2 text-xs font-semibold text-red-500 bg-[#111111] px-3 py-1.5 rounded shadow-sm border border-gray-700 min-w-[80px] text-center">
                                 Nrs. 2000
                             </div>
@@ -2060,8 +2330,6 @@
                         <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500">Show offers only</span>
                     </label>
                 </div>
-
-                
 
                 <div class="grid grid-cols-2 gap-3 pt-2">
                     <button id="clear-filters" class="py-2 px-4 bg-[#1a1a1a] text-gray-300 rounded text-sm font-semibold hover:bg-[#333] transition">Clear All</button>
@@ -2123,9 +2391,6 @@
         <div id="sidebar-overlay" class="fixed inset-0 bg-black/80 z-30 hidden lg:hidden"></div>
     </section>
 
-
-    
-
     <section class="py-16 md:py-24 container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center section-gradient-4" id="mac-cheese-section">
         <div class="scroll-in-animation">
             <h2 class="text-3xl md:text-5xl font-bold mb-6">Ultimate Creamy Mac and Cheese</h2>
@@ -2143,9 +2408,6 @@
             <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&q=80" class="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 w-32 h-32 md:w-48 md:h-48 rounded-2xl border-4 md:border-8 border-black object-cover" alt="Mac and Cheese Close-up">
         </div>
     </section>
-
-   
-   
 
     <!-- Testimonials Section with Auto Slider -->
     <section class="py-16 md:py-20 container mx-auto px-4 md:px-6 section-gradient-1">
@@ -2255,7 +2517,6 @@
         </div>
     </section>
 
-
     <section class="py-24 bg-zinc-950">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
@@ -2299,8 +2560,6 @@
                 </div>
             </div>
         </div>
-        
-        
     </div>
 </section>
 
@@ -2324,8 +2583,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="border-y border-gray-800 py-10 md:py-12">
             <div class="container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
@@ -2355,7 +2612,6 @@
                             class="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain">
                         <span class="text-lg md:text-xl font-bold tracking-tight">Bhok Express</span>
                     </div>
-                    
                 </div>
                 <p class="text-sm text-gray-400">Bhok Express brings your favorite meals straight to your door. Fast delivery, fresh flavors, and best restaurants – anytime, anywhere.</p>
             </div>
@@ -3358,6 +3614,226 @@
                     if (el) el.innerText = '0';
                 });
             }, 20);
+            
+            // ---------- FLOATING ACTION BUTTONS & SERVICE MODALS (UPDATED FOR WHATSAPP) ----------
+            const waiterModal = document.getElementById('waiter-modal');
+            const billModal = document.getElementById('bill-modal');
+            const fabWaiter = document.getElementById('fab-waiter');
+            const fabBill = document.getElementById('fab-bill');
+            const cartCallWaiter = document.getElementById('cart-call-waiter');
+            const cartRequestBill = document.getElementById('cart-request-bill');
+            const closeWaiterModal = document.getElementById('close-waiter-modal');
+            const closeBillModal = document.getElementById('close-bill-modal');
+            const cancelWaiterModal = document.getElementById('cancel-waiter-modal');
+            const cancelBillModal = document.getElementById('cancel-bill-modal');
+            const submitWaiter = document.getElementById('submit-waiter-request');
+            const submitBill = document.getElementById('submit-bill-request');
+            const waiterTableGrid = document.getElementById('waiter-table-grid');
+            
+            // Populate waiter table grid
+            if (waiterTableGrid) {
+                for (let i = 1; i <= 10; i++) {
+                    const chip = document.createElement('span');
+                    chip.className = 'table-chip text-sm py-2 px-4';
+                    chip.dataset.table = i;
+                    chip.innerText = `${i}`;
+                    chip.addEventListener('click', function() {
+                        document.querySelectorAll('#waiter-table-grid .table-chip').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                    waiterTableGrid.appendChild(chip);
+                }
+            }
+
+            // --- ADD TABLE SELECTION TO BILL MODAL ---
+            const billTableGrid = document.getElementById('bill-table-grid');
+            if (billTableGrid) {
+                for (let i = 1; i <= 10; i++) {
+                    const chip = document.createElement('span');
+                    chip.className = 'table-chip text-sm py-2 px-4';
+                    chip.dataset.table = i;
+                    chip.innerText = `${i}`;
+                    chip.addEventListener('click', function() {
+                        document.querySelectorAll('#bill-table-grid .table-chip').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                    billTableGrid.appendChild(chip);
+                }
+            }
+            
+            // Open waiter modal
+            function openWaiterModal() {
+                if (waiterModal) {
+                    waiterModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            // Close waiter modal
+            function closeWaiterModalFunc() {
+                if (waiterModal) {
+                    waiterModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            // Open bill modal
+            function openBillModal() {
+                if (billModal) {
+                    const billTableDisplay = document.getElementById('bill-table-display');
+                    if (billTableDisplay) {
+                        billTableDisplay.innerText = selectedTable ? `Table ${selectedTable}` : 'Not selected';
+                    }
+                    billModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            // Close bill modal
+            function closeBillModalFunc() {
+                if (billModal) {
+                    billModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            // --- WHATSAPP WAITER REQUEST ---
+            function submitWaiterRequestViaWhatsApp() {
+                const selectedWaiterTable = document.querySelector('#waiter-table-grid .table-chip.selected');
+                const tableNum = selectedWaiterTable ? selectedWaiterTable.dataset.table : 'Not selected';
+                const requestType = document.querySelector('input[name="waiter-request"]:checked');
+                const requestValue = requestType ? requestType.value : 'water';
+                const notes = document.querySelector('#waiter-modal textarea')?.value || '';
+                
+                if (tableNum === 'Not selected') {
+                    alert('Please select a table number.');
+                    return;
+                }
+                
+                let requestText = '';
+                switch(requestValue) {
+                    case 'water': requestText = 'Bring Water Bottle'; break;
+                    case 'beverage': requestText = 'Order Beverage'; break;
+                    case 'cutlery': requestText = 'Extra Cutlery'; break;
+                    case 'napkins': requestText = 'Napkins / Tissues'; break;
+                    case 'spill': requestText = 'Spill Clean-up'; break;
+                    default: requestText = 'Other Request';
+                }
+                
+                let message = '🍽️ *Bhok Express - Waiter Request* 🍽️\n';
+                message += `Table: ${tableNum}\n`;
+                message += `Request: ${requestText}\n`;
+                if (notes) message += `Notes: ${notes}\n`;
+                message += `\nThank you!`;
+                
+                const encoded = encodeURIComponent(message);
+                const whatsappURL = `https://wa.me/9779708095535?text=${encoded}`;
+                window.open(whatsappURL, '_blank');
+                closeWaiterModalFunc();
+            }
+            
+            // --- WHATSAPP BILL REQUEST ---
+            function submitBillRequestViaWhatsApp() {
+                const selectedBillTable = document.querySelector('#bill-table-grid .table-chip.selected');
+                const tableNum = selectedBillTable ? selectedBillTable.dataset.table : (selectedTable || 'Not selected');
+                
+                if (tableNum === 'Not selected' || tableNum === null) {
+                    alert('Please select a table number.');
+                    return;
+                }
+                
+                const pack = document.getElementById('bill-pack')?.checked ? 'Yes' : 'No';
+                const split = document.getElementById('bill-split')?.checked ? 'Yes' : 'No';
+                const feedback = document.getElementById('bill-feedback')?.checked ? 'Yes' : 'No';
+                const receipt = document.getElementById('bill-receipt')?.checked ? 'Yes' : 'No';
+                const payment = document.querySelector('#bill-modal select')?.value || 'cash';
+                const feedbackText = document.querySelector('#feedback-section textarea')?.value || '';
+                
+                let message = '🧾 *Bhok Express - Bill Request* 🧾\n';
+                message += `Table: ${tableNum}\n`;
+                message += `Pack Dish: ${pack}\n`;
+                message += `Split Bill: ${split}\n`;
+                message += `Feedback: ${feedback}\n`;
+                message += `Print Receipt: ${receipt}\n`;
+                message += `Payment: ${payment}\n`;
+                if (feedback && feedbackText) message += `Feedback Notes: ${feedbackText}\n`;
+                
+                // Add cart summary if available
+                if (cart.length > 0) {
+                    message += `\n*Order Summary:*\n`;
+                    cart.forEach(item => {
+                        message += `• ${item.name} x${item.quantity} = Nrs. ${item.price * item.quantity}\n`;
+                    });
+                    const total = cart.reduce((s,i) => s + i.price * i.quantity, 0);
+                    message += `\n*Total: Nrs. ${total}*\n`;
+                }
+                
+                message += `\nThank you!`;
+                
+                const encoded = encodeURIComponent(message);
+                const whatsappURL = `https://wa.me/9779708095535?text=${encoded}`;
+                window.open(whatsappURL, '_blank');
+                closeBillModalFunc();
+            }
+            
+            // Event listeners for modals
+            if (fabWaiter) fabWaiter.addEventListener('click', openWaiterModal);
+            if (fabBill) fabBill.addEventListener('click', openBillModal);
+            if (closeWaiterModal) closeWaiterModal.addEventListener('click', closeWaiterModalFunc);
+            if (closeBillModal) closeBillModal.addEventListener('click', closeBillModalFunc);
+            if (cancelWaiterModal) cancelWaiterModal.addEventListener('click', closeWaiterModalFunc);
+            if (cancelBillModal) cancelBillModal.addEventListener('click', closeBillModalFunc);
+            
+            if (waiterModal) {
+                waiterModal.addEventListener('click', (e) => { if (e.target === waiterModal) closeWaiterModalFunc(); });
+            }
+            if (billModal) {
+                billModal.addEventListener('click', (e) => { if (e.target === billModal) closeBillModalFunc(); });
+            }
+            
+            // Submit waiter request - NOW VIA WHATSAPP
+            if (submitWaiter) {
+                submitWaiter.addEventListener('click', submitWaiterRequestViaWhatsApp);
+            }
+            
+            // Submit bill request - NOW VIA WHATSAPP
+            if (submitBill) {
+                submitBill.addEventListener('click', submitBillRequestViaWhatsApp);
+            }
+            
+            // --- CART ACTION BUTTONS TO OPEN FLOATING BUTTON PANELS ---
+            if (cartCallWaiter) {
+                cartCallWaiter.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeCartModal(); // Close cart modal first
+                    setTimeout(() => {
+                        openWaiterModal(); // Then open waiter modal
+                    }, 300);
+                });
+            }
+            
+            if (cartRequestBill) {
+                cartRequestBill.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeCartModal(); // Close cart modal first
+                    setTimeout(() => {
+                        openBillModal(); // Then open bill modal
+                    }, 300);
+                });
+            }
+            
+            // Toggle feedback section
+            const feedbackCheckbox = document.getElementById('bill-feedback');
+            const feedbackSection = document.getElementById('feedback-section');
+            if (feedbackCheckbox && feedbackSection) {
+                feedbackCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        feedbackSection.classList.remove('hidden');
+                    } else {
+                        feedbackSection.classList.add('hidden');
+                    }
+                });
+            }
         });
         
         // --- Nepali Food Delivery Core Functions ---
@@ -3588,7 +4064,7 @@
                                 ${dish.offers && dish.offers.length > 0 ? `<span class="absolute bottom-2 left-2 bg-green-600 text-white text-[8px] font-bold px-2 py-1 rounded-full">${dish.offers[0]}</span>` : ''}
                             </div>
                             <div class="p-4 flex flex-col flex-grow">
-                                <div class="flex justify-between items-start">
+                                <div class="flex justify-between items-start mb-2 md:mb-4">
                                     <h3 class="font-bold text-lg">${dish.name}</h3>
                                     <span class="text-red-500 font-bold">Nrs. ${dish.price}</span>
                                 </div>
@@ -3752,7 +4228,7 @@
             
             if (rating40Checked && !rating35Checked && !rating30Checked) {
                 appState.filters.minRating = 4.0;
-            } else if (rating35Checked && !rating40Checked && !rating30Checked) {
+            } else if (rating35Checked && !rating40Checked && !rating35Checked) {
                 appState.filters.minRating = 3.5;
             } else if (rating30Checked && !rating40Checked && !rating35Checked) {
                 appState.filters.minRating = 3.0;

@@ -519,6 +519,37 @@
             .promo-card .text-xs {
                 font-size: 0.5rem !important;
             }
+            
+            /* Mobile dish card improvements */
+            .dish-card .flex.items-center.justify-between.mt-auto {
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+            }
+            
+            .dish-card .flex.items-center.border.border-gray-700.rounded-full.bg-gray-900 {
+                flex-shrink: 0 !important;
+            }
+            
+            .dish-card .flex.justify-between.items-start {
+                flex-wrap: wrap !important;
+                gap: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .dish-card h3 {
+                font-size: 0.9rem !important;
+                max-width: 60% !important;
+            }
+            
+            .dish-card .text-red-500.font-bold {
+                font-size: 0.85rem !important;
+                white-space: nowrap !important;
+            }
+            
+            .dish-card .p-4 {
+                padding: 0.75rem !important;
+            }
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -1407,8 +1438,9 @@
         }
         
         @media (max-width: 640px) {
-            .dish-card .flex.items-center {
-                flex-wrap: wrap;
+            .dish-card .flex.items-center.justify-between.mt-auto {
+                flex-wrap: nowrap !important;
+                gap: 0.5rem !important;
             }
             .cart-sidebar { 
                 width: 90% !important; 
@@ -1435,6 +1467,36 @@
         .category-filter.active {
             background: #DC2626;
             color: white;
+        }
+
+        /* Mobile slide to explore indicator */
+        .slide-indicator {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .slide-indicator {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.75rem;
+                color: #DC2626;
+                white-space: nowrap;
+                background: rgba(220, 38, 38, 0.1);
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                border: 1px solid rgba(220, 38, 38, 0.3);
+                margin-left: 0.5rem;
+            }
+            
+            .cuisine-scroll {
+                display: flex;
+                align-items: center;
+            }
+            
+            .cuisine-scroll::-webkit-scrollbar {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -1897,7 +1959,7 @@
         <div class="container mx-auto px-4 sm:px-6 mb-8">
             <div class="restaurant-banner rounded-2xl p-6 md:p-10 text-center relative overflow-hidden">
                 <div class="relative z-10">
-                    <h1 class="text-3xl md:text-5xl font-bold mb-3">Tandoori & Biryani Hub</h1>
+                    <h1 class="text-3xl md:text-5xl font-bold mb-3">Bhok Express</h1>
                     <p class="text-lg md:text-xl text-gray-300 mb-4">📍 Lazimpat, Kathmandu • ⭐ 4.8 (2.3k+ ratings)</p>
                     <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-300">
                         <span class="bg-red-500/30 px-4 py-1.5 rounded-full"><i class="fas fa-motorcycle mr-1"></i> 30-40 min</span>
@@ -2019,7 +2081,14 @@
             <main class="flex-1 w-full">
                 
                 <section class="mb-8 sm:mb-10">
-                    <h2 class="text-lg font-bold text-gray-300 mb-4 sm:mb-5">Favourite Cuisines</h2>
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold text-gray-300 mb-4 sm:mb-5">Cuisines</h2>
+                        <div class="slide-indicator">
+                            <i class="fas fa-arrow-right animate-pulse"></i>
+                            <span>Slide to explore</span>
+                            <i class="fas fa-arrow-left animate-pulse"></i>
+                        </div>
+                    </div>
                     <div id="cuisine-list" class="flex gap-6 sm:gap-8 overflow-x-auto hide-scrollbar pb-3 sm:pb-4 items-center cuisine-scroll">
                         <!-- Cuisine items will be dynamically rendered here -->
                     </div>
@@ -2378,65 +2447,74 @@
         // ---------- DISHES DATABASE (Single Restaurant: Tandoori & Biryani Hub) ----------
         const DISHES = [
             // Biryani variants
-            { id: 1, name: "Chicken Biryani", category: "biryani", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
-            { id: 2, name: "Mutton Biryani", category: "biryani", price: 550, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&fit=crop", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
-            { id: 3, name: "Veg Biryani", category: "biryani", price: 280, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
-            { id: 4, name: "Egg Biryani", category: "biryani", price: 300, image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&fit=crop", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            { id: 1, name: "Chicken Biryani", category: "biryani", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 2, name: "Mutton Biryani", category: "biryani", price: 550, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&fit=crop", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 3, name: "Veg Biryani", category: "biryani", price: 280, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 4, name: "Egg Biryani", category: "biryani", price: 300, image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&fit=crop", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
             
             // Momo varieties
-            { id: 5, name: "Jhol Momo", category: "momo", price: 280, image: "https://myriadrecipes.com/wp-content/uploads/2025/11/jhol-momo-13-500x500.jpg", desc: "Nepali style soup momo", dietary: "non-veg", rating: 4.8, popular: true, offers: ["Popular"] },
-            { id: 6, name: "Fried Momo", category: "momo", price: 260, image: "https://thumbs.dreamstime.com/b/nepalese-fried-momos-12571443.jpg", desc: "Crispy pan-fried chicken momo", dietary: "non-veg", rating: 4.6, popular: true, offers: [] },
-            { id: 7, name: "Steam Momo", category: "momo", price: 220, image: "https://thumbs.dreamstime.com/b/chicken-steam-momo-nepalese-traditional-dish-momo-stuffed-chicken-then-cooked-served-sauce-over-rustic-wooden-364389847.jpg", desc: "Classic steamed chicken momo", dietary: "non-veg", rating: 4.5, popular: false, offers: [] },
-            { id: 8, name: "Buff Momo", category: "momo", price: 240, image: "https://thumbs.dreamstime.com/b/chicken-steam-momo-nepalese-traditional-dish-momo-stuffed-chicken-then-cooked-served-sauce-over-rustic-wooden-364389847.jpg", desc: "Buff mince with spices", dietary: "non-veg", rating: 4.4, popular: true, offers: ["Combo Offer"] },
-            { id: 9, name: "Sea Momo (Prawn)", category: "momo", price: 380, image: "https://146776911.cdn6.editmysite.com/uploads/1/4/6/7/146776911/7FHMPZW3IV7LQ3QBPOFR7FZK.jpeg", desc: "Prawn & herbs momo", dietary: "non-veg", rating: 4.7, popular: false, offers: [] },
+            { id: 5, name: "Jhol Momo", category: "momo", price: 280, image: "https://myriadrecipes.com/wp-content/uploads/2025/11/jhol-momo-13-500x500.jpg", dietary: "non-veg", rating: 4.8, popular: true, offers: ["Popular"] },
+            { id: 6, name: "Fried Momo", category: "momo", price: 260, image: "https://thumbs.dreamstime.com/b/nepalese-fried-momos-12571443.jpg", dietary: "non-veg", rating: 4.6, popular: true, offers: [] },
+            { id: 7, name: "Steam Momo", category: "momo", price: 220, image: "https://thumbs.dreamstime.com/b/chicken-steam-momo-nepalese-traditional-dish-momo-stuffed-chicken-then-cooked-served-sauce-over-rustic-wooden-364389847.jpg", dietary: "non-veg", rating: 4.5, popular: false, offers: [] },
+            { id: 8, name: "Buff Momo", category: "momo", price: 240, image: "https://thumbs.dreamstime.com/b/chicken-steam-momo-nepalese-traditional-dish-momo-stuffed-chicken-then-cooked-served-sauce-over-rustic-wooden-364389847.jpg", dietary: "non-veg", rating: 4.4, popular: true, offers: ["Combo Offer"] },
+            { id: 9, name: "Sea Momo (Prawn)", category: "momo", price: 380, image: "https://146776911.cdn6.editmysite.com/uploads/1/4/6/7/146776911/7FHMPZW3IV7LQ3QBPOFR7FZK.jpeg", dietary: "non-veg", rating: 4.7, popular: false, offers: [] },
             
             // Indian dishes
-            { id: 10, name: "Butter Chicken", category: "indian", price: 450, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&fit=crop", desc: "Creamy tomato gravy", dietary: "non-veg", rating: 4.8, popular: true, offers: ["20% Off"] },
-            { id: 11, name: "Palak Paneer", category: "indian", price: 320, image: "https://sandhyahariharan.co.uk/wp-content/uploads/2020/08/palak-paneer-instant-pot.jpg", desc: "Cottage cheese in spinach", dietary: "veg", rating: 4.5, popular: false, offers: [] },
-            { id: 12, name: "Garlic Naan", category: "indian", price: 70, image: "https://manekancor.com/wp-content/uploads/2025/08/11-1.jpg", desc: "Tandoori bread with garlic", dietary: "veg", rating: 4.3, popular: true, offers: [] },
+            { id: 10, name: "Butter Chicken", category: "indian", price: 450, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&fit=crop", dietary: "non-veg", rating: 4.8, popular: true, offers: ["20% Off"] },
+            { id: 11, name: "Palak Paneer", category: "indian", price: 320, image: "https://sandhyahariharan.co.uk/wp-content/uploads/2020/08/palak-paneer-instant-pot.jpg", dietary: "veg", rating: 4.5, popular: false, offers: [] },
+            { id: 12, name: "Garlic Naan", category: "indian", price: 70, image: "https://manekancor.com/wp-content/uploads/2025/08/11-1.jpg", dietary: "veg", rating: 4.3, popular: true, offers: [] },
             
             // Nepali dishes
-            { id: 13, name: "Thakali Set", category: "nepali", price: 480, image: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400&fit=crop", desc: "Rice, dal, curry, pickles", dietary: "non-veg", rating: 4.9, popular: true, offers: ["Traditional"] },
-            { id: 14, name: "Sekuwa", category: "nepali", price: 350, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&fit=crop", desc: "Grilled spicy meat", dietary: "non-veg", rating: 4.7, popular: true, offers: [] },
-            { id: 15, name: "Chatamari", category: "nepali", price: 200, image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&fit=crop", desc: "Newari rice pancake", dietary: "veg", rating: 4.4, popular: false, offers: [] },
-
+            { id: 13, name: "Thakali Set", category: "nepali", price: 480, image: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400&fit=crop", dietary: "non-veg", rating: 4.9, popular: true, offers: ["Traditional"] },
+            { id: 14, name: "Sekuwa", category: "nepali", price: 350, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&fit=crop", dietary: "non-veg", rating: 4.7, popular: true, offers: [] },
+            { id: 15, name: "Chatamari", category: "nepali", price: 200, image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&fit=crop", dietary: "veg", rating: 4.4, popular: false, offers: [] },
+            { id: 19, name: "Dal Bhat", category: "nepali", price: 450, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&fit=crop", dietary: "veg", rating: 4.8, popular: true, offers: ["Combo"] },
+            { id: 20, name: "Samay Baji", category: "nepali", price: 550, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", dietary: "non-veg", rating: 4.9, popular: true, offers: ["Newari Special"] },
+            { id: 21, name: "Yomari", category: "nepali", price: 180, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&fit=crop", dietary: "veg", rating: 4.6, popular: false, offers: [] },
+            
+            // Thakali dishes
+            { id: 22, name: "Thakali Khana Set", category: "thakali", price: 520, image: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400&fit=crop", dietary: "non-veg", rating: 4.9, popular: true, offers: ["Special"] },
+            { id: 23, name: "Thakali Dal Bhat", category: "thakali", price: 480, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&fit=crop", dietary: "veg", rating: 4.8, popular: true, offers: [] },
+            { id: 24, name: "Thakali Chicken Curry", category: "thakali", price: 580, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&fit=crop", dietary: "non-veg", rating: 4.9, popular: true, offers: ["20% Off"] },
+            
             //Pizza
-            { id: 1, name: "Chicken Pizza Small", category: "pizza", price: 550, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
-            { id: 2, name: "Chickem Pizza Medium", category: "pizza", price: 850, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
-            { id: 3, name: "Veg Biryani", category: "pizza", price: 1280, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
-            { id: 4, name: "Small Egg Pizza", category: "pizza", price: 530, image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/eggs-florentine-pizza-2adefac.jpg", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
-            { id: 1, name: "Egg Pizza Medium", category: "pizza", price: 800, image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/eggs-florentine-pizza-2adefac.jpg", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
-            { id: 2, name: "Mushroom Pizza", category: "pizza", price: 1200, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXMJhWv-cYtmjjVABnTIS72-XmKUaJaBSrUg&s", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
-            { id: 3, name: "Huge Bumper Pizza", category: "pizza", price: 2280, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXMJhWv-cYtmjjVABnTIS72-XmKUaJaBSrUg&s", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
-            { id: 4, name: "Large Spicy Pizza", category: "pizza", price: 2300, image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&fit=crop", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            { id: 25, name: "Chicken Pizza Small", category: "pizza", price: 550, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 26, name: "Chicken Pizza Medium", category: "pizza", price: 850, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 27, name: "Veg Pizza", category: "pizza", price: 1280, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 28, name: "Small Egg Pizza", category: "pizza", price: 530, image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/eggs-florentine-pizza-2adefac.jpg", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            { id: 29, name: "Egg Pizza Medium", category: "pizza", price: 800, image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/eggs-florentine-pizza-2adefac.jpg", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 30, name: "Mushroom Pizza", category: "pizza", price: 1200, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXMJhWv-cYtmjjVABnTIS72-XmKUaJaBSrUg&s", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 31, name: "Huge Bumper Pizza", category: "pizza", price: 2280, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXMJhWv-cYtmjjVABnTIS72-XmKUaJaBSrUg&s", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 32, name: "Large Spicy Pizza", category: "pizza", price: 2300, image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&fit=crop", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
             
 
             //burger
-            { id: 1, name: "Burger", category: "burger", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
-            { id: 2, name: "Mutton Burger", category: "burger", price: 550, image: "https://www.allrecipes.com/thmb/nTxADEGhsHNQyBTUzmtyppeoc5g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/236679-lamb-burgers-3x4-487-c2045575a34c450fb60fc37ceffe5854.jpg", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
-            { id: 3, name: "Veg Burger", category: "burger", price: 280, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkyyRsR0vXAUGIS7sw7F9It_yzioyMBs1epw&s", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
-            { id: 4, name: "Egg Burger", category: "burger", price: 300, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmcix1Ds43WsdvaD1dsU0dBSOojhhBGbo3jw&s", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            { id: 33, name: "Burger", category: "burger", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 34, name: "Mutton Burger", category: "burger", price: 550, image: "https://www.allrecipes.com/thmb/nTxADEGhsHNQyBTUzmtyppeoc5g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/236679-lamb-burgers-3x4-487-c2045575a34c450fb60fc37ceffe5854.jpg", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 35, name: "Veg Burger", category: "burger", price: 280, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkyyRsR0vXAUGIS7sw7F9It_yzioyMBs1epw&s", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 36, name: "Egg Burger", category: "burger", price: 300, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmcix1Ds43WsdvaD1dsU0dBSOojhhBGbo3jw&s", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
             
             // Drinks
-            { id: 16, name: "Mango Lassi", category: "drinks", price: 150, image: "https://www.midwestliving.com/thmb/2n9egOlUYE0dnPxJoHYY7disquI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/KeyIngredient_MangoLassi_BP_1019_preview-0bdf9f28d35043748efaa9fd1c7b806c.jpg", desc: "Sweet yogurt drink", dietary: "veg", rating: 4.6, popular: true, offers: [] },
-            { id: 16, name: "Banana Lassi", category: "drinks", price: 180, image: "https://www.awesomecuisine.com/wp-content/uploads/2016/06/Banana-Lassi.jpg", desc: "Sweet banana drink", dietary: "veg", rating: 4.5, popular: true, offers: [] },
-            { id: 16, name: "Chocolate Lassi", category: "drinks", price: 190, image: "https://5.imimg.com/data5/QR/EK/GLADMIN-28464664/chocolate-lassi.png", desc: "Sweet yogurt drink", dietary: "veg", rating: 4.6, popular: true, offers: [] },
-            { id: 17, name: "Iced Tea", category: "drinks", price: 120, image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400&fit=crop", desc: "Lemon mint", dietary: "veg", rating: 4.2, popular: false, offers: [] },
-            { id: 18, name: "Black Coffee", category: "drinks", price: 100, image: "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=400&fit=crop", desc: "Fresh brewed", dietary: "veg", rating: 4.4, popular: false, offers: [] },
+            { id: 37, name: "Mango Lassi", category: "drinks", price: 150, image: "https://www.midwestliving.com/thmb/2n9egOlUYE0dnPxJoHYY7disquI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/KeyIngredient_MangoLassi_BP_1019_preview-0bdf9f28d35043748efaa9fd1c7b806c.jpg", dietary: "veg", rating: 4.6, popular: true, offers: [] },
+            { id: 38, name: "Banana Lassi", category: "drinks", price: 180, image: "https://www.awesomecuisine.com/wp-content/uploads/2016/06/Banana-Lassi.jpg", dietary: "veg", rating: 4.5, popular: true, offers: [] },
+            { id: 39, name: "Chocolate Lassi", category: "drinks", price: 190, image: "https://5.imimg.com/data5/QR/EK/GLADMIN-28464664/chocolate-lassi.png", dietary: "veg", rating: 4.6, popular: true, offers: [] },
+            { id: 40, name: "Iced Tea", category: "drinks", price: 120, image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400&fit=crop", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 41, name: "Black Coffee", category: "drinks", price: 100, image: "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=400&fit=crop", dietary: "veg", rating: 4.4, popular: false, offers: [] },
         ];
 
-        // Cuisine data 
+        // Cuisine data - Added thakali and nepali
         const cuisines = [
-            { id: 'all', name: 'All', icon: 'fa-th-large', image: 'https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=150&h=150&fit=crop', count: 18 },
-            { id: 'biryani', name: 'Biryani', icon: 'fa-utensils', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&h=150&fit=crop', count: 4 },
+            { id: 'all', name: 'All', icon: 'fa-th-large', image: 'https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=150&h=150&fit=crop', count: 50 },
+            { id: 'biryani', name: 'Biryani', icon: 'fa-utensils', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&h=150&fit=crop', count: 8 },
             { id: 'momo', name: 'Momo', icon: 'fa-dumpling', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=150&h=150&fit=crop', count: 5 },
-            { id: 'indian', name: 'Indian', icon: 'fa-utensil-spoon', image: 'https://img.teletext.com/images/5_traditional_indian_dishes_you_must_try_88b7ec9815.jpg', count: 3 },
-            { id: 'pizza', name: 'Pizza', icon: 'fa-mountain', image: 'https://lh6.googleusercontent.com/proxy/zuMyN3Mu_0cEJQ_duyFrgOhBZzh3zXgTNWdzoRhnuDMEVcU4hG5Q8xbo5OjMO81gehXJnMCqJ-XvTBntahbufHUcZYF1F2xIOm7TLE_iGg', count: 3 },
-            { id: 'burger', name: 'Burger', icon: 'fa-mountain', image: 'https://www.foodandwine.com/thmb/XE8ubzwObCIgMw7qJ9CsqUZocNM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MSG-Smash-Burger-FT-RECIPE0124-d9682401f3554ef683e24311abdf342b.jpg', count: 3 },
+            { id: 'indian', name: 'Indian', icon: 'fa-utensil-spoon', image: 'https://img.teletext.com/images/5_traditional_indian_dishes_you_must_try_88b7ec9815.jpg', count: 7 },
+            { id: 'nepali', name: 'Nepali', icon: 'fa-mountain', image: 'https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=150&h=150&fit=crop', count: 9 },
+            { id: 'thakali', name: 'Thakali', icon: 'fa-utensils', image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=150&h=150&fit=crop', count: 6 },
+            { id: 'pizza', name: 'Pizza', icon: 'fa-mountain', image: 'https://lh6.googleusercontent.com/proxy/zuMyN3Mu_0cEJQ_duyFrgOhBZzh3zXgTNWdzoRhnuDMEVcU4hG5Q8xbo5OjMO81gehXJnMCqJ-XvTBntahbufHUcZYF1F2xIOm7TLE_iGg', count: 8 },
+            { id: 'burger', name: 'Burger', icon: 'fa-mountain', image: 'https://www.foodandwine.com/thmb/XE8ubzwObCIgMw7qJ9CsqUZocNM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MSG-Smash-Burger-FT-RECIPE0124-d9682401f3554ef683e24311abdf342b.jpg', count: 9 },
             { id: 'chinese', name: 'Chinese', icon: 'fa-mountain', image: 'https://www.china-admissions.com/wp-content/uploads/2020/02/Chinese-food.jpg', count: 3 },
-            { id: 'kebab', name: 'Kebab', icon: 'fa-mountain', image: 'https://cookingorgeous.com/wp-content/uploads/2021/06/lamb-shish-kebab-20.jpg', count: 3 },
-            
-            { id: 'drinks', name: 'Drinks', icon: 'fa-coffee', image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=150&h=150&fit=crop', count: 3 }
+            { id: 'kebab', name: 'Kebab', icon: 'fa-mountain', image: 'https://cookingorgeous.com/wp-content/uploads/2021/06/lamb-shish-kebab-20.jpg', count: 5 },
+            { id: 'drinks', name: 'Drinks', icon: 'fa-coffee', image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=150&h=150&fit=crop', count: 10 }
         ];
 
         // ---------- GLOBAL CART STATE ----------
@@ -2547,8 +2625,7 @@
                 if (searchTerm.trim()) {
                     const filtered = DISHES.filter(dish => 
                         dish.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        dish.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        dish.desc.toLowerCase().includes(searchTerm.toLowerCase())
+                        dish.category.toLowerCase().includes(searchTerm.toLowerCase())
                     );
                     
                     appState.filteredDishes = filtered;
@@ -3515,11 +3592,6 @@
                                     <h3 class="font-bold text-lg">${dish.name}</h3>
                                     <span class="text-red-500 font-bold">Nrs. ${dish.price}</span>
                                 </div>
-                                <div class="flex items-center gap-1 mt-1 mb-2">
-                                    <i class="fas fa-star text-red-500 text-xs"></i>
-                                    <span class="text-xs text-gray-300">${dish.rating}</span>
-                                </div>
-                                <p class="text-gray-400 text-xs mt-1 mb-3">${dish.desc}</p>
                                 <div class="flex items-center justify-between mt-auto">
                                     <div class="flex items-center border border-gray-700 rounded-full bg-gray-900">
                                         <button class="qty-btn dec-btn" data-id="${dish.id}">−</button>

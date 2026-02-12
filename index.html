@@ -1,0 +1,3696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/Bhok Express Logo.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/Bhok Express Logo.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/Bhok Express Logo.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Bhok Express Logo.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/Bhok Express Logo.jpg">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/Bhok Express Logo.jpg">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/Bhok Express Logo.jpg">
+    <link rel="manifest" href="site.webmanifest">
+    <title>Bhok Express - Where fun meets passion</title>
+    
+    <script>
+        // Tailwind Configuration
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                red: {
+                  300: '#FCA5A5',
+                  400: '#EF4444',
+                  500: '#DC2626',
+                  600: '#B91C1C',
+                  700: '#991B1B',
+                },
+                gray: {
+                  900: '#0A0A0A',
+                  800: '#111111',
+                  400: '#9CA3AF',
+                }
+              },
+              fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+              },
+              borderRadius: {
+                '3xl': '2rem',
+              },
+              animation: {
+                'slide-in-right': 'slideInRight 0.3s ease-out',
+                'slide-in-up': 'slideInUp 0.4s ease-out',
+                'fade-in': 'fadeIn 0.5s ease-out',
+                'scale-in': 'scaleIn 0.3s ease-out',
+                'float': 'float 3s ease-in-out infinite',
+                'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+              },
+              keyframes: {
+                slideInRight: {
+                  '0%': { transform: 'translateX(100%)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                slideInUp: {
+                  '0%': { transform: 'translateY(20px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                fadeIn: {
+                  '0%': { opacity: '0' },
+                  '100%': { opacity: '1' },
+                },
+                scaleIn: {
+                  '0%': { transform: 'scale(0.95)', opacity: '0' },
+                  '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                float: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-10px)' },
+                },
+                pulseGlow: {
+                  '0%, 100%': { opacity: '0.7' },
+                  '50%': { opacity: '1' },
+                },
+              }
+            }
+          }
+        }
+    </script>
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #0A0A0A;
+            color: white;
+        }
+        .hero-gradient { 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)); 
+        }
+        .hide-scrollbar::-webkit-scrollbar { 
+            display: none; 
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        header {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        header.sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideDown 0.4s ease;
+        }
+        
+        header.translucent {
+            background-color: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(8px);
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+        }
+        
+        .parallax-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 130%;
+            object-fit: cover;
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+        
+        .testimonial-slider {
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .testimonial-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-slide {
+                min-width: 50%;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .testimonial-slide {
+                min-width: 33.333%;
+            }
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #111;
+            border-radius: 1.5rem;
+            max-width: 90%;
+            width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* Mobile menu animation */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .promo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 150px;
+        }
+        
+        .promo-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            transition: all 0.4s ease;
+        }
+        
+        .promo-icon {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            font-size: 1.5rem;
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .promo-card:hover .promo-card-bg {
+            opacity: 0.3;
+            transform: scale(1.05);
+        }
+        
+        .promo-card:hover .promo-icon {
+            transform: scale(1.1) rotate(10deg);
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+        }
+        
+        .delivery-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        
+        .delivery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        
+        .delivery-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(220, 38, 38, 0.7), rgba(220, 38, 38, 0.5), rgba(220, 38, 38, 0.7));
+            z-index: 1;
+        }
+        
+        .section-gradient-1 {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 100%);
+        }
+        
+        .section-gradient-2 {
+            background: linear-gradient(135deg, #111111 0%, #222222 100%);
+        }
+        
+        .section-gradient-3 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+        
+        .section-gradient-4 {
+            background: linear-gradient(135deg, #222222 0%, #333333 100%);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-in-up {
+            animation: slideInUp 0.6s ease;
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .glide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            will-change: transform;
+        }
+        
+        .developer-text {
+            font-size: 10px;
+            color: #666;
+            letter-spacing: 1px;
+        }
+        
+        .developer-text a {
+            color: #DC2626;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .developer-text a:hover {
+            color: #EF4444;
+        }
+
+        #explore-more {
+            scroll-behavior: smooth;
+        }
+
+        .explore-category {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .explore-category:hover {
+            transform: translateY(-8px);
+        }
+
+        .explore-category img {
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .explore-category:hover img {
+            transform: scale(1.05);
+        }
+
+        #food-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .food-category {
+            transition: all 0.3s ease;
+        }
+
+        .food-category:hover {
+            transform: translateY(-2px);
+        }
+
+        .food-category.active .w-12 {
+            border-color: #DC2626;
+            color: #DC2626;
+        }
+
+        .food-category.active span {
+            color: white;
+            font-weight: 600;
+        }
+
+        .bg-bg-card {
+            background-color: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bg-bg-card:hover {
+            border-color: rgba(220, 38, 38, 0.3);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
+        }
+
+        .add-to-cart {
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+        }
+
+        .bg-white {
+            background-color: white;
+            color: black;
+        }
+
+        .bg-gray-100 {
+            background-color: #f3f4f6;
+        }
+
+        @media (max-width: 768px) {
+            #explore-more .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #explore-more .md\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #food-items {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            #dishes-container {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.5rem !important;
+            }
+            
+            #dishes-container .relative {
+                height: 120px !important;
+            }
+            
+            #dishes-container img {
+                height: 120px !important;
+            }
+            
+            #dishes-container .absolute.bottom-4 {
+                bottom: 0.5rem !important;
+                left: 0.5rem !important;
+                right: 0.5rem !important;
+                padding: 0.5rem !important;
+            }
+            
+            #dishes-container h4 {
+                font-size: 0.7rem !important;
+            }
+            
+            #dishes-container p {
+                font-size: 0.6rem !important;
+            }
+            
+            #dishes-container .bg-red-500 {
+                padding: 0.25rem !important;
+                font-size: 0.6rem !important;
+            }
+            
+            .promo-card {
+                min-height: 120px !important;
+                padding: 0.75rem !important;
+            }
+            
+            .promo-icon {
+                font-size: 1.25rem !important;
+                top: 0.25rem !important;
+                right: 0.25rem !important;
+            }
+            
+            .promo-card h4 {
+                font-size: 0.75rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            .promo-card p {
+                font-size: 0.6rem !important;
+                margin-bottom: 0.25rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .promo-card span {
+                font-size: 0.55rem !important;
+                padding: 0.15rem 0.3rem !important;
+            }
+            
+            .promo-card .text-xs {
+                font-size: 0.5rem !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #explore-more .md\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #food-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #dishes-container {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1rem !important;
+            }
+            
+            #dishes-container .relative {
+                height: 140px !important;
+            }
+            
+            #dishes-container img {
+                height: 140px !important;
+            }
+            
+            #dishes-container .absolute.bottom-4 {
+                bottom: 0.75rem !important;
+                left: 0.75rem !important;
+                right: 0.75rem !important;
+                padding: 0.75rem !important;
+            }
+            
+            #dishes-container h4 {
+                font-size: 0.8rem !important;
+            }
+            
+            #dishes-container p {
+                font-size: 0.65rem !important;
+            }
+            
+            .promo-card {
+                min-height: 140px !important;
+                padding: 1rem !important;
+            }
+            
+            .promo-icon {
+                font-size: 1.5rem !important;
+                top: 0.5rem !important;
+                right: 0.5rem !important;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .food-category.active .w-12 {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bg-bg-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .bg-bg-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .bg-bg-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        #food-categories {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #DC2626;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #DC2626;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #DC2626;
+        }
+
+        .nfd-container {
+            background-color: #0A0A0A !important;
+            color: white !important;
+        }
+
+        .nfd-container .bg-white {
+            background-color: #111111 !important;
+            color: white !important;
+            border-color: #333 !important;
+        }
+
+        .nfd-container .text-gray-700,
+        .nfd-container .text-gray-600,
+        .nfd-container .text-gray-500 {
+            color: #9CA3AF !important;
+        }
+
+        .nfd-container .border-gray-200,
+        .nfd-container .border-gray-300 {
+            border-color: #333 !important;
+        }
+
+        .nfd-container .bg-gray-50,
+        .nfd-container .bg-gray-100 {
+            background-color: #1a1a1a !important;
+        }
+
+        .nfd-container .text-primary {
+            color: #DC2626 !important;
+        }
+
+        .nfd-container .bg-primary {
+            background-color: #DC2626 !important;
+        }
+
+        .nfd-container .border-primary {
+            border-color: #DC2626 !important;
+        }
+
+        .nfd-container input[type=range]::-webkit-slider-thumb {
+            background: #DC2626 !important;
+        }
+
+        .nfd-container input[type=range]::-webkit-slider-runnable-track {
+            background: #333 !important;
+        }
+
+        .nfd-container .price-range-slider {
+            background: linear-gradient(to right, #DC2626 0%, #DC2626 50%, #333 50%, #333 100%) !important;
+        }
+
+        .nfd-container .active-cuisine {
+            border: 2px solid #DC2626 !important;
+        }
+
+        .nfd-container .cuisine-item:hover .cuisine-image {
+            border-color: #DC2626 !important;
+        }
+
+        .nfd-container .restaurant-card {
+            background-color: #111111 !important;
+            border-color: #333 !important;
+        }
+
+        .nfd-container .restaurant-card:hover {
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2) !important;
+        }
+
+        .nfd-container .restaurant-offer {
+            background-color: #DC2626 !important;
+            color: white !important;
+        }
+
+        .nfd-container .restaurant-popular {
+            background-color: #DC2626 !important;
+            color: white !important;
+        }
+
+        .nfd-container .rating-price {
+            border-top-color: #333 !important;
+        }
+
+        .nfd-container button {
+            transition: all 0.3s ease !important;
+        }
+
+        .nfd-container button:hover {
+            transform: translateY(-2px) !important;
+        }
+
+        .nfd-container #sidebar {
+            background-color: #111111 !important;
+        }
+
+        .nfd-container #sidebar-overlay {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+        }
+
+        .nfd-container #apply-filters {
+            background-color: #DC2626 !important;
+            color: white !important;
+        }
+
+        .nfd-container #apply-filters:hover {
+            background-color: #B91C1C !important;
+        }
+
+        .nfd-container #clear-filters {
+            background-color: #1a1a1a !important;
+            color: white !important;
+        }
+
+        .nfd-container #clear-filters:hover {
+            background-color: #333 !important;
+        }
+
+        .nfd-container #mobile-filter-btn {
+            background-color: #DC2626 !important;
+            color: white !important;
+        }
+
+        .nfd-container #mobile-filter-btn:hover {
+            background-color: #B91C1C !important;
+        }
+
+      
+        .nfd-container .sort-checkbox:checked,
+        .nfd-container .dietary-checkbox:checked,
+        .nfd-container #show-offers:checked,
+        .nfd-container #rating-4\\.0:checked,
+        .nfd-container #rating-3\\.5:checked,
+        .nfd-container #rating-3\\.0:checked {
+            accent-color: #DC2626 !important;
+        }
+
+        .nfd-container .price-low-high:hover,
+        .nfd-container .price-high-low:hover {
+            background-color: #333 !important;
+        }
+
+        .nfd-container .price-low-high.active,
+        .nfd-container .price-high-low.active {
+            background-color: #DC2626 !important;
+            color: white !important;
+        }
+
+        /* Changed halal to non-veg */
+        .nfd-container .dietary-badge.non-veg {
+            background-color: rgba(220, 38, 38, 0.2) !important;
+            color: #FCA5A5 !important;
+        }
+
+        .nfd-container .dietary-badge.vegetarian {
+            background-color: rgba(34, 197, 94, 0.2) !important;
+            color: #86efac !important;
+        }
+
+        .nfd-container .dietary-badge.vegan {
+            background-color: rgba(101, 163, 13, 0.2) !important;
+            color: #bef264 !important;
+        }
+
+        .nfd-container .dietary-badge.gluten-free {
+            background-color: rgba(245, 158, 11, 0.2) !important;
+            color: #fde68a !important;
+        }
+
+        .nfd-container #location-input {
+            background-color: #1a1a1a !important;
+            color: white !important;
+            border-color: #333 !important;
+        }
+
+        .nfd-container #location-input:focus {
+            border-color: #DC2626 !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3) !important;
+        }
+
+        .nfd-container #current-location-btn {
+            color: #DC2626 !important;
+        }
+
+        .nfd-container #current-location-btn:hover {
+            color: #B91C1C !important;
+        }
+
+        .nfd-container #location-display {
+            background-color: #1a1a1a !important;
+            border-color: #333 !important;
+        }
+
+        .nfd-container #map-container {
+            border-color: #333 !important;
+        }
+
+        .nfd-container .location-controls h4 {
+            color: #DC2626 !important;
+        }
+
+        .nfd-container .green-50 {
+            background-color: rgba(22, 163, 74, 0.1) !important;
+        }
+
+        .nfd-container .red-500 {
+            color: #DC2626 !important;
+        }
+
+        .nfd-container .green-600 {
+            color: #16a34a !important;
+        }
+
+        .nfd-container .text-green-500 {
+            color: #16a34a !important;
+        }
+
+        .nfd-container .text-emerald-800 {
+            color: #065f46 !important;
+        }
+
+        .nfd-container .text-lime-800 {
+            color: #3f6212 !important;
+        }
+
+        .nfd-container .text-amber-800 {
+            color: #92400e !important;
+        }
+        
+        /* Custom classes to fix issues */
+        .grayscale-0 {
+            filter: grayscale(0);
+        }
+        
+        .hover\:grayscale-0:hover {
+            filter: grayscale(0);
+        }
+        
+        .grayscale {
+            filter: grayscale(1);
+        }
+        
+        .location-input-wrapper {
+            position: relative;
+        }
+        
+        .price-range-slider {
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        .location-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .location-controls {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #explore-more {
+            scroll-behavior: smooth;
+        }
+
+        .explore-category {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .explore-category:hover {
+            transform: translateY(-8px);
+        }
+
+        .explore-category img {
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .explore-category:hover img {
+            transform: scale(1.05);
+        }
+
+        #food-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .food-category {
+            transition: all 0.3s ease;
+        }
+
+        .food-category:hover {
+            transform: translateY(-2px);
+        }
+
+        .food-category.active .w-12 {
+            border-color: #DC2626;
+            color: #DC2626;
+        }
+
+        .food-category.active span {
+            color: white;
+            font-weight: 600;
+        }
+
+        .bg-bg-card {
+            background-color: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bg-bg-card:hover {
+            border-color: rgba(220, 38, 38, 0.3);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
+        }
+
+        .add-to-cart {
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            #explore-more .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #explore-more .md\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #food-items {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #explore-more .md\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #food-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .food-category.active .w-12 {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bg-bg-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .bg-bg-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .bg-bg-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        #food-categories {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #DC2626;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #DC2626;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #DC2626;
+        }
+
+        @media (min-width: 1024px) {
+            .nfd-container #restaurants-container {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .nfd-container #restaurants-container {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .nfd-container #restaurants-container {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .nfd-container .restaurant-card {
+                height: auto !important;
+                min-height: 280px !important;
+            }
+            
+            .nfd-container .restaurant-image {
+                height: 140px !important;
+            }
+            
+            .nfd-container .restaurant-details {
+                padding: 1rem !important;
+            }
+            
+            .nfd-container .restaurant-name {
+                font-size: 0.875rem !important;
+            }
+            
+            .nfd-container .restaurant-meta {
+                font-size: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-slide {
+                padding: 0 8px !important;
+            }
+            
+            .testimonial-slide .bg-\[#111\] {
+                padding: 1.5rem !important;
+                height: auto !important;
+            }
+            
+            .testimonial-slide p {
+                font-size: 0.875rem !important;
+                line-height: 1.4 !important;
+            }
+            
+            .testimonial-track {
+                padding-bottom: 10px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .relative.h-\[500px\].md\:h-\[600px\] {
+                height: auto !important;
+                min-height: 500px !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .container {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+                flex-direction: column !important;
+                gap: 3rem !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .flex-col.md\:flex-row {
+                gap: 3rem !important;
+                flex-direction: column !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .bg-white\/10 {
+                margin-top: 0 !important;
+                padding: 1.5rem !important;
+                order: 1 !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .max-w-md {
+                order: 2 !important;
+                margin-top: 0 !important;
+                text-align: center !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .max-w-md h2 {
+                font-size: 2rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .max-w-md p {
+                margin-bottom: 0.75rem !important;
+                font-size: 1rem !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .bg-white\/10 h3 {
+                font-size: 1.5rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .bg-white\/10 p {
+                margin-bottom: 0.5rem !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .relative.h-\[500px\].md\:h-\[600px\] .bg-white\/10 button {
+                margin-top: 1rem !important;
+                padding: 0.75rem 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .promo-card {
+                padding: 0.75rem !important;
+                min-height: 120px !important;
+            }
+            
+            .promo-icon {
+                font-size: 1.25rem !important;
+                top: 0.25rem !important;
+                right: 0.25rem !important;
+            }
+            
+            .promo-card h4 {
+                font-size: 0.75rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            .promo-card p {
+                font-size: 0.6rem !important;
+                margin-bottom: 0.25rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .promo-card span {
+                font-size: 0.55rem !important;
+                padding: 0.15rem 0.3rem !important;
+            }
+            
+            .promo-card .text-xs {
+                font-size: 0.5rem !important;
+            }
+        }
+        
+        .fa-arrow-right.text-\[10px\] {
+            color: black !important;
+            font-size: 10px !important;
+        }
+        
+
+        .nfd-search-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+        
+        .nfd-search-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nfd-search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .nfd-search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .nfd-search-button {
+            background: #DC2626;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .nfd-search-button:hover {
+            background: #B91C1C;
+        }
+        
+        html {
+            scroll-behavior: auto !important;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+        .video-hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* New testimonial styles for mobile */
+        @media (max-width: 768px) {
+            .testimonial-slide {
+                min-width: 250px !important;
+                width: 250px !important;
+            }
+            
+            .testimonial-track {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+        
+        /* Scroll in animation for Mac & Cheese section */
+        .scroll-in-animation {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scroll-in-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NEW STYLES FOR DISH CARDS & CART ===== */
+        .dish-card {
+            background: #111111;
+            border: 1px solid #333;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .dish-card:hover {
+            border-color: #DC2626;
+            box-shadow: 0 10px 20px rgba(220,38,38,0.2);
+            transform: translateY(-3px);
+        }
+        
+        .qty-btn {
+            background: #2a2a2a;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .qty-btn:hover {
+            background: #DC2626;
+        }
+        
+        .add-to-cart-btn {
+            background: #DC2626;
+            color: white;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #B91C1C;
+            transform: scale(1.03);
+        }
+        
+        /* Cart badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #DC2626;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Table selector */
+        .table-chip {
+            background: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #ddd;
+        }
+        
+        .table-chip.selected {
+            background: #DC2626;
+            border-color: #DC2626;
+            color: white;
+        }
+        
+        /* Cart item buttons */
+        .cart-inc, .cart-dec {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        
+        .cart-inc:hover, .cart-dec:hover {
+            background: #DC2626;
+        }
+        
+        @media (max-width: 640px) {
+            .dish-card .flex.items-center {
+                flex-wrap: wrap;
+            }
+            .cart-sidebar { 
+                width: 90% !important; 
+            }
+        }
+        
+        /* Ensure restaurant container shows dishes grid */
+        #restaurants-container {
+            display: grid !important;
+        }
+        
+        /* Restaurant header banner */
+        .restaurant-banner {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Category filter styling */
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter.active {
+            background: #DC2626;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <header class="w-full z-50 transition-all duration-400">
+        <nav class="container mx-auto px-4 py-3 md:px-6 md:py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <img src="assets/Bhok Express Logo.jpg" alt="Bhok Express Logo" 
+                    class="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain">
+                <span class="text-lg md:text-xl font-bold tracking-tight">Bhok Express</span>
+            </div>
+            
+            <ul class="hidden lg:flex space-x-6 text-sm font-medium">
+                <li><a href="#" class="hover:text-red-500 transition flex items-center">
+                    <i class="fas fa-clipboard-list mr-1.5"></i> Orders
+                </a></li>
+                <li><a href="#" class="hover:text-red-500 transition flex items-center">
+                    <i class="fas fa-tag mr-1.5"></i> Promotions
+                </a></li>
+                <li class="relative group">
+                    <button id="partner-dropdown-btn" class="hover:text-red-500 transition flex items-center focus:outline-none">
+                        <i class="fas fa-handshake mr-1.5"></i> Partner with us <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                        <button class="w-full text-left px-4 py-3 text-sm hover:bg-gray-700 rounded-t-lg focus:outline-none" id="restaurant-partner-btn">Restaurant Partner</button>
+                        <button class="w-full text-left px-4 py-3 text-sm hover:bg-gray-700 rounded-b-lg focus:outline-none" id="delivery-partner-btn">Delivery Partner</button>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center space-x-4 md:space-x-6 relative">
+                <!-- CART ICON with badge -->
+                <button id="cart-icon-header" class="relative text-white hover:text-red-400 text-xl">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count-badge" class="cart-badge">0</span>
+                </button>
+                <button id="login-btn" class="bg-red-500 text-white px-4 py-1.5 md:px-6 md:py-2 rounded-full text-sm font-medium hover:bg-red-600 transition">Login/Signup</button>
+                <button id="mobile-menu-btn" class="lg:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-menu" class="absolute top-6 right-6 text-3xl focus:outline-none">&times;</button>
+        <div class="flex flex-col items-center space-y-8 text-2xl">
+            <a href="#" class="hover:text-red-500 transition flex items-center"><i class="fas fa-clipboard-list mr-3"></i> Orders</a>
+            <a href="#" class="hover:text-red-500 transition flex items-center"><i class="fas fa-tag mr-3"></i> Promotions</a>
+            <button id="mobile-login-btn" class="hover:text-red-500 transition flex items-center"><i class="fas fa-user mr-3"></i> Login/Signup</button>
+            <button id="mobile-cart-btn" class="hover:text-red-500 transition flex items-center"><i class="fas fa-shopping-cart mr-3"></i> Cart <span id="mobile-cart-count" class="ml-1 bg-red-600 px-2 py-0.5 text-sm rounded-full">0</span></button>
+            <div class="pt-4 text-center w-full">
+                <p class="text-red-500 text-lg mb-2">Partner with us</p>
+                <div class="flex flex-col items-center">
+                    <button id="mobile-restaurant-btn" class="hover:text-red-500 transition text-lg block text-center w-full">Restaurant Partner</button>
+                    <button id="mobile-delivery-btn" class="hover:text-red-500 transition text-lg block mt-2 text-center w-full">Delivery Partner</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Signup Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Login / Signup</h3>
+                <button id="close-login-modal" class="text-gray-400 hover:text-white text-2xl focus:outline-none">&times;</button>
+            </div>
+            
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email or Phone Number</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter email or phone">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter password">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember" class="mr-2 accent-red-500">
+                    <label for="remember" class="text-sm">Remember me</label>
+                </div>
+                
+                <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-lg font-bold hover:bg-red-600 transition">Login</button>
+                
+                <div class="text-center text-gray-400 text-sm my-4">OR</div>
+                
+                <button type="button" class="w-full bg-white text-black py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center justify-center">
+                    <i class="fab fa-google mr-2"></i> Continue with Google
+                </button>
+                
+                <button type="button" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition flex items-center justify-center">
+                    <i class="fab fa-facebook mr-2"></i> Continue with Facebook
+                </button>
+                
+                <div class="text-center text-sm text-gray-400 mt-4">
+                    Don't have an account? <button type="button" id="switch-to-signup" class="text-red-500 hover:underline focus:outline-none">Sign up</button>
+                </div>
+            </form>
+            
+            <form id="signup-form" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Full Name</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter your full name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter email address">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone Number</label>
+                    <input type="tel" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter phone number">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Create password">
+                </div>
+                
+                <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-lg font-bold hover:bg-red-600 transition">Create Account</button>
+                
+                <div class="text-center text-sm text-gray-400 mt-4">
+                    Already have an account? <button type="button" id="switch-to-login" class="text-red-500 hover:underline focus:outline-none">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Restaurant Partner Modal -->
+    <div id="restaurant-modal" class="modal-overlay">
+        <div class="modal-content p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Partner Your Restaurant</h3>
+                <button id="close-restaurant-modal" class="text-gray-400 hover:text-white text-2xl focus:outline-none">&times;</button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-store text-red-500 text-2xl"></i>
+                    </div>
+                </div>
+                <p class="text-gray-300 text-center">Join thousands of restaurants growing with Bhok Express</p>
+            </div>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Restaurant Name</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter restaurant name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Contact Person</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter contact name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter email address">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone Number</label>
+                    <input type="tel" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter phone number">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Restaurant Location</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter restaurant address">
+                </div>
+                
+                <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-lg font-bold hover:bg-red-600 transition">Submit Application</button>
+                
+                <p class="text-xs text-gray-400 text-center mt-4">
+                    By submitting, you agree to our <a href="#" class="text-red-500 hover:underline">Partner Terms</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delivery Partner Modal -->
+    <div id="delivery-modal" class="modal-overlay">
+        <div class="modal-content p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Become a Delivery Partner</h3>
+                <button id="close-delivery-modal" class="text-gray-400 hover:text-white text-2xl focus:outline-none">&times;</button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-motorcycle text-red-500 text-2xl"></i>
+                    </div>
+                </div>
+                <p class="text-gray-300 text-center">Earn on your schedule with flexible hours</p>
+            </div>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Full Name</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter your full name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter email address">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone Number</label>
+                    <input type="tel" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter phone number">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">City</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Enter your city">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Vehicle Type</label>
+                    <select class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500">
+                        <option value="">Select vehicle type</option>
+                        <option value="bike">Motorcycle/Bike</option>
+                        <option value="scooter">Scooter</option>
+                        <option value="car">Car</option>
+                        <option value="bicycle">Bicycle</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-lg font-bold hover:bg-red-600 transition">Apply Now</button>
+                
+                <div class="mt-6 p-4 bg-gray-800/50 rounded-lg">
+                    <h4 class="font-bold mb-2 text-sm">Why deliver with Bhok Express?</h4>
+                    <ul class="text-xs text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-2 text-xs"></i> Flexible hours - work when you want</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-2 text-xs"></i> Weekly payments</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-2 text-xs"></i> Earn tips on every delivery</li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CART MODAL -->
+    <div id="cart-modal" class="modal-overlay">
+        <div class="modal-content p-5 md:p-6 w-full max-w-md md:max-w-2xl">
+            <div class="flex justify-between items-center border-b border-gray-700 pb-3 mb-4">
+                <h3 class="text-2xl font-bold flex items-center"><i class="fas fa-shopping-cart text-red-500 mr-3"></i> Your Cart</h3>
+                <button id="close-cart-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+            </div>
+            
+            <!-- cart items list -->
+            <div id="cart-items-container" class="space-y-4 max-h-60 overflow-y-auto pr-1 mb-4">
+                <!-- dynamic cart items -->
+            </div>
+            
+            <!-- Table Number Selection -->
+            <div class="border-t border-gray-700 pt-4 mt-2">
+                <h4 class="font-semibold text-md mb-3"><i class="fas fa-chair mr-2 text-red-500"></i> Select Table Number</h4>
+                <div class="flex flex-wrap gap-3 mb-4" id="table-number-grid">
+                    <!-- table chips 1-10 -->
+                </div>
+                <div class="flex items-center justify-between bg-gray-900 p-3 rounded-lg">
+                    <span class="text-gray-300">Selected Table:</span>
+                    <span id="selected-table-display" class="font-bold text-red-500 text-lg">None</span>
+                </div>
+            </div>
+            
+            <!-- Cart total & checkout -->
+            <div class="border-t border-gray-700 pt-4 mt-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <span class="text-gray-400 text-sm">Total Amount</span>
+                    <p class="text-2xl font-bold text-red-500" id="cart-total-price">Nrs. 0</p>
+                </div>
+                <button id="whatsapp-order-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2 w-full sm:w-auto justify-center">
+                    <i class="fab fa-whatsapp text-xl"></i> Order via WhatsApp
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-3 text-center">You'll be redirected to WhatsApp with your order summary.</p>
+        </div>
+    </div>
+
+    <section class="relative h-[70vh] md:h-screen flex items-center justify-center text-center px-4 md:px-6">
+        <!-- CHANGED: Replaced image with local video -->
+        <div class="absolute inset-0 z-0">
+            <video class="video-hero" autoplay muted loop playsinline>
+                <source src="assets/Restro Vid shrt.mp4" type="video/mp4">
+            
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-60" alt="Hero Background">
+            </video>
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl w-full fade-in">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">Enjoy healthy and delicious food.</h1>
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Lightning-fast delivery from your favorite restaurants near you...</p>
+       
+            <div class="relative max-w-2xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-md rounded-full p-1 flex items-center">
+                    <div class="flex-1 flex items-center">
+                        <i class="fas fa-search text-gray-400 ml-4 mr-2"></i>
+                        <input type="text" id="hero-search-input" placeholder="Search restaurant / dishes..." class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none py-3 md:py-4">
+                    </div>
+                    <button id="hero-search-button" class="bg-red-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-bold hover:bg-red-600 transition">Search</button>
+                </div>
+                
+                <div class="flex flex-wrap justify-center mt-6 gap-2">
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Pizza">Pizza</span>
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Burger">Burger</span>
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Thakali">Thakali</span>
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Nepali">Nepali</span>
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Indian">Indian</span>
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Sushi">Sushi</span>
+                    <span class="text-xs bg-gray-800/60 text-gray-300 px-3 py-1.5 rounded-full food-tag" data-food="Pasta">Pasta</span>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 md:py-20 container mx-auto px-4 md:px-6 slide-in-up section-gradient-1">
+        <div class="flex justify-between items-end mb-8 md:mb-12">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-2">Crave-Worthy Dishes You'll Love</h2>
+                <p class="text-gray-400 text-sm md:text-base">Discover a rare world of dishes you'll find nowhere else but at Home, and anywhere you'd like.</p>
+            </div>
+            <div class="hidden md:flex space-x-2">
+                <button id="prev-dish" class="w-10 h-10 bg-gray-800 rounded flex items-center justify-center hover:bg-red-500 transition"><i class="fas fa-chevron-left text-xs"></i></button>
+                <button id="next-dish" class="w-10 h-10 bg-red-500 rounded flex items-center justify-center hover:bg-red-600 transition"><i class="fas fa-chevron-right text-xs"></i></button>
+            </div>
+        </div>
+
+    
+        <div class="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8" id="dishes-container">
+            <div class="relative group cursor-pointer overflow-hidden rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&q=80" class="w-full h-32 md:h-40 object-cover transition duration-500 group-hover:scale-110" alt="Chicken Dinner">
+                <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md p-2 rounded-xl flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm">Easy Chicken Dinner</h4>
+                        <p class="text-[10px] text-gray-300">Delicious taste</p>
+                    </div>
+                    <div class="bg-red-500 p-1.5 rounded-lg text-[10px]"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="relative group cursor-pointer overflow-hidden rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&q=80" class="w-full h-32 md:h-40 object-cover transition duration-500 group-hover:scale-110" alt="Sweet Potato Toast">
+                <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md p-2 rounded-xl flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm">Sweet Potato Toast</h4>
+                        <p class="text-[10px] text-gray-300">Toast Favorites</p>
+                    </div>
+                    <div class="bg-red-500 p-1.5 rounded-lg text-[10px]"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="relative group cursor-pointer overflow-hidden rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80" class="w-full h-32 md:h-40 object-cover transition duration-500 group-hover:scale-110" alt="Fresh Salad">
+                <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md p-2 rounded-xl flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm">Fresh Salad Salads</h4>
+                        <p class="text-[10px] text-gray-300">with Power</p>
+                    </div>
+                    <div class="bg-red-500 p-1.5 rounded-lg text-[10px]"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex md:hidden justify-center mt-8 space-x-2">
+            <button id="prev-dish-mobile" class="w-10 h-10 bg-gray-800 rounded flex items-center justify-center hover:bg-red-500 transition"><i class="fas fa-chevron-left text-xs"></i></button>
+            <button id="next-dish-mobile" class="w-10 h-10 bg-red-500 rounded flex items-center justify-center hover:bg-red-600 transition"><i class="fas fa-chevron-right text-xs"></i></button>
+        </div>
+    </section>
+
+    <!-- Promo Codes Section -->
+    <section class="py-12 md:py-16 section-gradient-2">
+        <div class="container mx-auto px-4 md:px-6 slide-in-up">
+            <div class="flex justify-between items-center mb-6 md:mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold">Special Promotions</h2>
+                <a href="#" class="text-red-500 text-sm md:text-base font-medium hover:underline">View All</a>
+            </div>
+            
+            <!-- Smaller promo cards grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+                <!-- Promo Card 1 -->
+                <div class="promo-card bg-gradient-to-r from-red-500/20 to-red-600/10 border border-red-500/30 p-4 md:p-6 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=400" class="promo-card-bg" alt="First Order">
+                    <div class="promo-icon text-2xl md:text-4xl text-red-500/70">
+                        <i class="fas fa-gift animate-float"></i>
+                    </div>
+                    <div class="mb-2 md:mb-4 relative z-10">
+                        <span class="bg-red-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full">FLAT 50% OFF</span>
+                    </div>
+                    <h4 class="font-bold text-sm md:text-lg mb-1 md:mb-2 relative z-10">FIRSTORDER50</h4>
+                    <p class="text-gray-300 text-xs md:text-sm mb-2 md:mb-4 relative z-10 leading-tight">Get 50% off on your first order above Nrs 500</p>
+                    <div class="mt-auto text-[10px] md:text-xs text-gray-400 relative z-10">Valid till: 30 Dec 2026</div>
+                </div>
+                
+                <!-- Promo Card 2 -->
+                <div class="promo-card bg-gradient-to-r from-purple-500/20 to-purple-600/10 border border-purple-500/30 p-4 md:p-6 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=400" class="promo-card-bg" alt="Free Delivery">
+                    <div class="promo-icon text-2xl md:text-4xl text-purple-500/70">
+                        <i class="fas fa-truck animate-float"></i>
+                    </div>
+                    <div class="mb-2 md:mb-4 relative z-10">
+                        <span class="bg-purple-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full">FREE DELIVERY</span>
+                    </div>
+                    <h4 class="font-bold text-sm md:text-lg mb-1 md:mb-2 relative z-10">FREEDELIVERY</h4>
+                    <p class="text-gray-300 text-xs md:text-sm mb-2 md:mb-4 relative z-10 leading-tight">Free delivery on all orders above Nrs 800</p>
+                    <div class="mt-auto text-[10px] md:text-xs text-gray-400 relative z-10">Valid till: 25 Dec 2026</div>
+                </div>
+                
+                <!-- Promo Card 3 -->
+                <div class="promo-card bg-gradient-to-r from-green-500/20 to-green-600/10 border border-green-500/30 p-4 md:p-6 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=400" class="promo-card-bg" alt="Cashback">
+                    <div class="promo-icon text-2xl md:text-4xl text-green-500/70">
+                        <i class="fas fa-money-bill-wave animate-float"></i>
+                    </div>
+                    <div class="mb-2 md:mb-4 relative z-10">
+                        <span class="bg-green-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full">CASHBACK 20%</span>
+                    </div>
+                    <h4 class="font-bold text-sm md:text-lg mb-1 md:mb-2 relative z-10">CASHBACK20</h4>
+                    <p class="text-gray-300 text-xs md:text-sm mb-2 md:mb-4 relative z-10 leading-tight">Get 20% cashback on orders via BhokPay</p>
+                    <div class="mt-auto text-[10px] md:text-xs text-gray-400 relative z-10">Valid till: 31 Dec 2026</div>
+                </div>
+                
+                <!-- Promo Card 4 -->
+                <div class="promo-card bg-gradient-to-r from-blue-500/20 to-blue-600/10 border border-blue-500/30 p-4 md:p-6 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=400" class="promo-card-bg" alt="Combo Offer">
+                    <div class="promo-icon text-2xl md:text-4xl text-blue-500/70">
+                        <i class="fas fa-utensils animate-float"></i>
+                    </div>
+                    <div class="mb-2 md:mb-4 relative z-10">
+                        <span class="bg-blue-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full">COMBO OFFER</span>
+                    </div>
+                    <h4 class="font-bold text-sm md:text-lg mb-1 md:mb-2 relative z-10">COMBO30</h4>
+                    <p class="text-gray-300 text-xs md:text-sm mb-2 md:mb-4 relative z-10 leading-tight">30% off on all combo meals</p>
+                    <div class="mt-auto text-[10px] md:text-xs text-gray-400 relative z-10">Valid till: 20 Dec 2026</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 md:mt-10 text-center">
+                <button class="bg-red-500 text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition" id="promo-order-now">Apply Promo Code</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!--  (Added to Explore More) -->
+   <section class="py-24 bg-zinc-950 nfd-container" id="explore-more">
+        <!-- Search Bar at Top -->
+        <div class="nfd-search-container mb-10">
+            <div class="nfd-search-bar">
+                <input type="text" id="nfd-search-input" class="nfd-search-input" placeholder="Search dishes...">
+                <button id="nfd-search-button" class="nfd-search-button">Search</button>
+            </div>
+        </div>
+        
+        <!-- Restaurant Banner (Single Restaurant) -->
+        <div class="container mx-auto px-4 sm:px-6 mb-8">
+            <div class="restaurant-banner rounded-2xl p-6 md:p-10 text-center relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-3xl md:text-5xl font-bold mb-3">Tandoori & Biryani Hub</h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-4">📍 Lazimpat, Kathmandu • ⭐ 4.8 (2.3k+ ratings)</p>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-300">
+                        <span class="bg-red-500/30 px-4 py-1.5 rounded-full"><i class="fas fa-motorcycle mr-1"></i> 30-40 min</span>
+                        <span class="bg-gray-800 px-4 py-1.5 rounded-full"><i class="fas fa-tag mr-1"></i> 20% off first order</span>
+                        <span class="bg-gray-800 px-4 py-1.5 rounded-full"><i class="fas fa-clock mr-1"></i> Open 11AM - 11PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Filter Tabs -->
+        
+        
+        <!-- link from search -->
+        <div class="container mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col lg:flex-row gap-6 sm:gap-8" id="restaurant-search-section">
+            
+            <aside id="sidebar" class="hidden lg:block w-full lg:w-64 flex-shrink-0 space-y-6 bg-[#111111] lg:bg-transparent p-4 lg:p-0 fixed lg:relative inset-0 z-40 overflow-y-auto lg:overflow-visible">
+                
+                <div class="flex justify-between items-center lg:hidden mb-4">
+                    <h2 class="text-xl font-bold">Filters</h2>
+                    <button id="close-sidebar" class="text-gray-500"><i class="fas fa-times"></i></button>
+                </div>
+
+                
+
+                <!-- Enhanced Sort By with Multiple Selection -->
+                <div class="bg-[#111111] p-4 rounded-lg shadow-sm border border-gray-700">
+                    <h3 class="font-bold text-gray-300 mb-4">Sort by (Multiple)</h3>
+                    <div class="space-y-3">
+                     
+                        
+                        <!-- Dietary Preferences -->
+                        <div class="pt-2 mt-2 border-t border-gray-600">
+                            <h4 class="text-xs font-semibold text-gray-500 mb-2">Dietary Preferences</h4>
+                            
+                            <!-- non-veg -->
+                            <label class="flex items-center cursor-pointer group">
+                                <input type="checkbox" name="dietary" value="non-veg" class="w-4 h-4 text-red-500 rounded focus:ring-red-500 border-gray-700 dietary-checkbox">
+                                <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500 flex items-center">
+                                    <i class="fas fa-drumstick-bite mr-2 text-sm text-red-400"></i>Non-Veg
+                                </span>
+                            </label>
+                            
+                            <label class="flex items-center cursor-pointer group">
+                                <input type="checkbox" name="dietary" value="vegetarian" class="w-4 h-4 text-red-500 rounded focus:ring-red-500 border-gray-700 dietary-checkbox">
+                                <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500 flex items-center">
+                                    <i class="fas fa-leaf mr-2 text-sm text-green-500"></i>Vegetarian
+                                </span>
+                            </label>
+                            
+                            <label class="flex items-center cursor-pointer group">
+                                <input type="checkbox" name="dietary" value="vegan" class="w-4 h-4 text-red-500 rounded focus:ring-red-500 border-gray-700 dietary-checkbox">
+                                <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500 flex items-center">
+                                    <i class="fas fa-seedling mr-2 text-sm text-green-500"></i>Vegan
+                                </span>
+                            </label>
+                            
+                            <label class="flex items-center cursor-pointer group">
+                                <input type="checkbox" name="dietary" value="gluten-free" class="w-4 h-4 text-red-500 rounded focus:ring-red-500 border-gray-700 dietary-checkbox">
+                                <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500 flex items-center">
+                                    <i class="fas fa-wheat mr-2 text-sm text-amber-500"></i>Gluten-Free
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Price Range -->
+                <div class="bg-[#111111] p-4 rounded-lg shadow-sm border border-gray-700">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-300">Price Range (Nrs.)</h3>
+                        <div class="flex gap-2">
+                            <button id="price-low-high" class="text-xs bg-[#1a1a1a] hover:bg-[#333] text-gray-300 px-2 py-1 rounded transition">Low to High</button>
+                            <button id="price-high-low" class="text-xs bg-[#1a1a1a] hover:bg-[#333] text-gray-300 px-2 py-1 rounded transition">High to Low</button>
+                        </div>
+                    </div>
+                    <div class="px-1">
+                        <div class="relative">
+                            <input type="range" id="price-range" min="50" max="2000" value="2000" 
+                                   class="w-full h-1 price-range-slider rounded-lg appearance-none cursor-pointer">
+                            <!-- Wider Price Tooltip -->
+                            <div id="price-tooltip" class="absolute top-[-35px] transform -translate-x-1/2 text-xs font-semibold text-red-500 bg-[#111111] px-3 py-1.5 rounded shadow-sm border border-gray-700 min-w-[80px] text-center">
+                                Nrs. 2000
+                            </div>
+                        </div>
+                        <div class="flex justify-between mt-7 text-xs text-gray-500 font-medium">
+                            <span>Nrs. 50</span>
+                            <span id="current-price" class="text-red-500 font-bold">Current: Nrs. 2000</span>
+                            <span>Nrs. 2000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#111111] p-4 rounded-lg shadow-sm border border-gray-700">
+                    <h3 class="font-bold text-gray-300 mb-4">Offers</h3>
+                    <label class="flex items-center cursor-pointer group">
+                        <input type="checkbox" id="show-offers" class="w-4 h-4 text-red-500 rounded focus:ring-red-500 border-gray-700">
+                        <span class="ml-3 text-sm text-gray-400 group-hover:text-red-500">Show offers only</span>
+                    </label>
+                </div>
+
+                
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button id="clear-filters" class="py-2 px-4 bg-[#1a1a1a] text-gray-300 rounded text-sm font-semibold hover:bg-[#333] transition">Clear All</button>
+                    <button id="apply-filters" class="py-2 px-4 bg-red-500 text-white rounded text-sm font-semibold hover:bg-red-600 transition shadow-md">Apply</button>
+                </div>
+
+            </aside>
+
+            <!-- Mobile Filter Button -->
+            <div class="lg:hidden mb-4">
+                <button id="mobile-filter-btn" class="w-full py-3 bg-red-500 text-white rounded-lg font-semibold flex items-center justify-center gap-2">
+                    <i class="fas fa-filter"></i>
+                    Show Filters
+                </button>
+            </div>
+
+            <main class="flex-1 w-full">
+                
+                <section class="mb-8 sm:mb-10">
+                    <h2 class="text-lg font-bold text-gray-300 mb-4 sm:mb-5">Favourite Cuisines</h2>
+                    <div id="cuisine-list" class="flex gap-6 sm:gap-8 overflow-x-auto hide-scrollbar pb-3 sm:pb-4 items-center cuisine-scroll">
+                        <!-- Cuisine items will be dynamically rendered here -->
+                    </div>
+                </section>
+
+                <div class="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+                    <h2 id="restaurant-count" class="text-xl font-bold text-gray-300">18 Dishes Available</h2>
+                    <div class="text-sm text-gray-400 hidden" id="active-filter">
+                        <span class="bg-red-500/10 text-red-500 px-3 py-1 rounded-full">Filtered</span>
+                    </div>
+                </div>
+
+                <!-- DISHES GRID - Changed from restaurants to dishes -->
+                <div id="restaurants-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+                    <!-- Dishes will be injected via JS -->
+                </div>
+
+                <div id="loading-spinner" class="hidden text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-3xl text-red-500"></i>
+                    <p class="mt-2 text-gray-400">Loading dishes...</p>
+                </div>
+
+                <div id="no-results" class="hidden text-center py-12">
+                    <i class="fas fa-utensils text-4xl text-gray-700 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">No dishes found</h3>
+                    <p class="text-gray-500">Try changing your filters or select a different cuisine</p>
+                </div>
+
+            </main>
+        </div>
+
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/80 z-30 hidden lg:hidden"></div>
+    </section>
+
+
+    
+
+    <section class="py-16 md:py-24 container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center section-gradient-4" id="mac-cheese-section">
+        <div class="scroll-in-animation">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Ultimate Creamy Mac and Cheese</h2>
+            <p class="text-gray-400 mb-6 md:mb-8">Creamy, comforting, and satisfying—these Mac and cheese recipes are ready for any occasion.</p>
+            <ul class="space-y-3 md:space-y-4 mb-8 md:mb-10">
+                <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Easy gourmet cheese selections</li>
+                <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Comfort food classic with a twist</li>
+                <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Fast, fire-finished recipe options</li>
+                <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Available for delivery in 30 minutes</li>
+            </ul>
+            <button class="bg-red-500 text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-bold hover:bg-red-600 transition" id="mac-order-now">Order Now</button>
+        </div>
+        <div class="relative scroll-in-animation">
+            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&q=80" class="rounded-3xl w-full h-64 md:h-96 object-cover" alt="Mac and Cheese Main">
+            <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&q=80" class="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 w-32 h-32 md:w-48 md:h-48 rounded-2xl border-4 md:border-8 border-black object-cover" alt="Mac and Cheese Close-up">
+        </div>
+    </section>
+
+   
+   
+
+    <!-- Testimonials Section with Auto Slider -->
+    <section class="py-16 md:py-20 container mx-auto px-4 md:px-6 section-gradient-1">
+        <div class="text-center mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Customers Say</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Nothing makes us happier than serving meals our customers love.</p>
+        </div>
+        
+        <div class="relative testimonial-slider">
+            <div class="testimonial-track" id="testimonial-track">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"The food always arrives hot and fresh. I love how easy it is to order my favorites. Bhok Express never disappoints!"</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=1" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">sita Chamlagain</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"I tried their Green-House Pizza and it was incredible! Delivery was super quick, and the taste was spotless."</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=2" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">Ram Bahadur</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"Bhok Express has become my go-to for busy nights. The variety is amazing and the service is always top-notch."</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=3" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">Jenny Chaudhary</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"Their 30-minute delivery guarantee is real! Food always arrives hot and exactly as ordered. Highly recommend!"</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=4" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">IRON MAN</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 5 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"The app is so user-friendly and the delivery tracking feature is excellent. Food quality is consistently great!"</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=5" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">Durga Vagwan</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 6 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"Best food delivery service in town! The promos are great and customer service is responsive and helpful."</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=6" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">Michael </h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 7 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"Exceptional service every time! The food is always fresh and delivery is faster than expected. Five stars!"</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=7" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">Sophia Gurung</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 8 -->
+                <div class="testimonial-slide px-2">
+                    <div class="bg-[#111] p-4 md:p-6 rounded-3xl h-full">
+                        <div class="flex text-red-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm md:text-base italic mb-4 md:mb-6">"Love the variety of restaurants available. From local Nepali food to international cuisine, they have it all!"</p>
+                        <div class="flex items-center">
+                            <img src="https://i.pravatar.cc/100?u=8" class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-3 md:mr-4">
+                            <div><h6 class="font-bold text-xs md:text-sm">Rajesh Shrestha</h6><div class="flex text-red-500 text-[10px] md:text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-24 bg-zinc-950">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-extrabold mb-4">Explore More</h2>
+            <div class="flex justify-center gap-2">
+                
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="explore-categories">
+            <div class="explore-category group cursor-pointer">
+                <div class="aspect-square rounded-full overflow-hidden mb-6 border-4 border-transparent group-hover:border-red-500 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=400" alt="Comfort Food" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
+                </div>
+                <div class="bg-zinc-900 py-3 px-4 rounded-full text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white/90">Comfort Food Classics</span>
+                </div>
+            </div>
+            <div class="explore-category group cursor-pointer">
+                <div class="aspect-square rounded-full overflow-hidden mb-6 border-4 border-transparent group-hover:border-red-500 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?auto=format&fit=crop&q=80&w=400" alt="International Eats" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
+                </div>
+                <div class="bg-zinc-900 py-3 px-4 rounded-full text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white/90">International Eats</span>
+                </div>
+            </div>
+            <div class="explore-category group cursor-pointer">
+                <div class="aspect-square rounded-full overflow-hidden mb-6 border-4 border-transparent group-hover:border-red-500 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&q=80&w=400" alt="Breakfast & Brunch" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
+                </div>
+                <div class="bg-zinc-900 py-3 px-4 rounded-full text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white/90">Breakfast & Brunch</span>
+                </div>
+            </div>
+            <div class="explore-category group cursor-pointer">
+                <div class="aspect-square rounded-full overflow-hidden mb-6 border-4 border-transparent group-hover:border-red-500 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=400" alt="Quick & Easy" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
+                </div>
+                <div class="bg-zinc-900 py-3 px-4 rounded-full text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white/90">Quick & Easy</span>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</section>
+
+    <footer class="bg-black pt-16 md:pt-20">
+        <div class="relative h-[500px] md:h-[600px] flex items-center">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-30">
+            <div class="container mx-auto px-4 md:px-6 relative z-10 flex flex-col md:flex-row justify-between items-center gap-10 md:gap-12">
+                <div class="max-w-md text-center md:text-left">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 md:mb-8">Contact Us</h2>
+                    <p class="mb-3 md:mb-4 text-lg"><i class="fas fa-phone mr-2 text-red-500"></i> +977 (9708) 095 535</p>
+                    <p class="mb-6 md:mb-8 text-lg"><i class="fas fa-envelope mr-2 text-red-500"></i> info@bhokexpress.com</p>
+                    <button class="border border-white px-6 md:px-8 py-3 rounded-full hover:bg-white hover:text-black transition" id="footer-order-now">Order Now</button>
+                </div>
+                <div class="bg-white/10 backdrop-blur-xl p-6 md:p-10 rounded-3xl text-center border border-white/20">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Fast & Reliable Delivery</h3>
+                    <p class="text-red-500 font-bold mb-2">24/7 Delivery Service</p>
+                    <p class="text-lg md:text-xl mb-4 md:mb-6">Order anytime, day or night</p>
+                    <p class="text-red-500 font-bold mb-2">Average Delivery Time</p>
+                    <p class="text-lg md:text-xl mb-8 md:mb-10">30-45 minutes within city limits</p>
+                    <button class="bg-red-500 text-white px-8 md:px-10 py-3 rounded-full hover:bg-red-600 transition">TRACK YOUR ORDER</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="border-y border-gray-800 py-10 md:py-12">
+            <div class="container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+                <div>
+                    <i class="fas fa-award text-3xl mb-4 text-red-500"></i>
+                    <h5 class="font-bold mb-2">Quality Food</h5>
+                    <p class="text-xs md:text-sm text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</p>
+                </div>
+                <div>
+                    <i class="fas fa-thumbs-up text-3xl mb-4 text-red-500"></i>
+                    <h5 class="font-bold mb-2">100% Satisfaction</h5>
+                    <p class="text-xs md:text-sm text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</p>
+                </div>
+                <div>
+                    <i class="fas fa-truck text-3xl mb-4 text-red-500"></i>
+                    <h5 class="font-bold mb-2">Fast Delivery</h5>
+                    <p class="text-xs md:text-sm text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 md:px-6 py-12 md:py-20 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+            <div>
+                <div class="flex items-center space-x-2 mb-6">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/Bhok Express Logo.jpg" alt="Bhok Express Logo" 
+                            class="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain">
+                        <span class="text-lg md:text-xl font-bold tracking-tight">Bhok Express</span>
+                    </div>
+                    
+                </div>
+                <p class="text-sm text-gray-400">Bhok Express brings your favorite meals straight to your door. Fast delivery, fresh flavors, and best restaurants – anytime, anywhere.</p>
+            </div>
+            <div>
+                <h6 class="font-bold mb-6">Pages</h6>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li><a href="#" class="hover:text-red-500 transition">Home</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Menu</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Order online</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Catering</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Reservation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-bold mb-6">Information</h6>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li><a href="#" class="hover:text-red-500 transition">About us</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Testimonial</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Event</a></li>
+                    <li><a href="#" class="hover:text-red-500 transition">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-bold mb-6">Get in Touch</h6>
+                <div class="flex space-x-4 mb-8">
+                    <a href="https://www.facebook.com/profile.php?id=61582788814219#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61582788814219#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61582788814219#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61582788814219#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="relative">
+                    <input type="text" placeholder="Enter your email" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-red-500 transition text-sm">
+                    <button class="absolute right-0 top-2 uppercase text-[10px] font-bold tracking-widest text-red-500 hover:text-red-400">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 py-6">
+            <div class="container mx-auto px-4 md:px-6 text-center">
+                <p class="text-gray-500 text-sm">&copy; 2026 Bhok Express. All rights reserved. | <a href="#" class="hover:text-red-500 transition">Privacy Policy</a> | <a href="#" class="hover:text-red-500 transition">Terms of Service</a></p>
+                <p class="developer-text mt-2">Developed by <a href="#" class="font-medium">Singha Techne</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    
+    <script>
+        // Tailwind Configuration for Nepali Food Delivery Section
+        tailwind.config = {
+            theme: {
+                extend: {
+                colors: {
+                    primary: '#DC2626',
+                    red: {
+                    500: '#DC2626',
+                    600: '#B91C1C',
+                    400: '#EF4444',
+                    700: '#991B1B',
+                    300: '#FCA5A5',
+                    },
+                    green: {
+                    600: '#16A34A',
+                    50: '#F0FDF4',
+                    },
+                    gray: {
+                        50: '#111111',
+                        100: '#1a1a1a',
+                        200: '#333333',
+                        500: '#9CA3AF',
+                        700: '#4A4A4A',
+                        800: '#2D2D2D',
+                    }
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                boxShadow: {
+                    'card': '0 1px 3px rgba(0,0,0,0.1)',
+                },
+                screens: {
+                    'xs': '475px',
+                }
+                }
+            }
+        }
+
+        // ---------- DISHES DATABASE (Single Restaurant: Tandoori & Biryani Hub) ----------
+        const DISHES = [
+            // Biryani variants
+            { id: 1, name: "Chicken Biryani", category: "biryani", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 2, name: "Mutton Biryani", category: "biryani", price: 550, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&fit=crop", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 3, name: "Veg Biryani", category: "biryani", price: 280, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 4, name: "Egg Biryani", category: "biryani", price: 300, image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&fit=crop", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            
+            // Momo varieties
+            { id: 5, name: "Jhol Momo", category: "momo", price: 280, image: "https://myriadrecipes.com/wp-content/uploads/2025/11/jhol-momo-13-500x500.jpg", desc: "Nepali style soup momo", dietary: "non-veg", rating: 4.8, popular: true, offers: ["Popular"] },
+            { id: 6, name: "Fried Momo", category: "momo", price: 260, image: "https://thumbs.dreamstime.com/b/nepalese-fried-momos-12571443.jpg", desc: "Crispy pan-fried chicken momo", dietary: "non-veg", rating: 4.6, popular: true, offers: [] },
+            { id: 7, name: "Steam Momo", category: "momo", price: 220, image: "https://thumbs.dreamstime.com/b/chicken-steam-momo-nepalese-traditional-dish-momo-stuffed-chicken-then-cooked-served-sauce-over-rustic-wooden-364389847.jpg", desc: "Classic steamed chicken momo", dietary: "non-veg", rating: 4.5, popular: false, offers: [] },
+            { id: 8, name: "Buff Momo", category: "momo", price: 240, image: "https://thumbs.dreamstime.com/b/chicken-steam-momo-nepalese-traditional-dish-momo-stuffed-chicken-then-cooked-served-sauce-over-rustic-wooden-364389847.jpg", desc: "Buff mince with spices", dietary: "non-veg", rating: 4.4, popular: true, offers: ["Combo Offer"] },
+            { id: 9, name: "Sea Momo (Prawn)", category: "momo", price: 380, image: "https://146776911.cdn6.editmysite.com/uploads/1/4/6/7/146776911/7FHMPZW3IV7LQ3QBPOFR7FZK.jpeg", desc: "Prawn & herbs momo", dietary: "non-veg", rating: 4.7, popular: false, offers: [] },
+            
+            // Indian dishes
+            { id: 10, name: "Butter Chicken", category: "indian", price: 450, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&fit=crop", desc: "Creamy tomato gravy", dietary: "non-veg", rating: 4.8, popular: true, offers: ["20% Off"] },
+            { id: 11, name: "Palak Paneer", category: "indian", price: 320, image: "https://sandhyahariharan.co.uk/wp-content/uploads/2020/08/palak-paneer-instant-pot.jpg", desc: "Cottage cheese in spinach", dietary: "veg", rating: 4.5, popular: false, offers: [] },
+            { id: 12, name: "Garlic Naan", category: "indian", price: 70, image: "https://manekancor.com/wp-content/uploads/2025/08/11-1.jpg", desc: "Tandoori bread with garlic", dietary: "veg", rating: 4.3, popular: true, offers: [] },
+            
+            // Nepali dishes
+            { id: 13, name: "Thakali Set", category: "nepali", price: 480, image: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400&fit=crop", desc: "Rice, dal, curry, pickles", dietary: "non-veg", rating: 4.9, popular: true, offers: ["Traditional"] },
+            { id: 14, name: "Sekuwa", category: "nepali", price: 350, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&fit=crop", desc: "Grilled spicy meat", dietary: "non-veg", rating: 4.7, popular: true, offers: [] },
+            { id: 15, name: "Chatamari", category: "nepali", price: 200, image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&fit=crop", desc: "Newari rice pancake", dietary: "veg", rating: 4.4, popular: false, offers: [] },
+
+            //Pizza
+            { id: 1, name: "Chicken Pizza Small", category: "pizza", price: 550, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 2, name: "Chickem Pizza Medium", category: "pizza", price: 850, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 3, name: "Veg Biryani", category: "pizza", price: 1280, image: "https://theartisticcook.com/wp-content/uploads/2025/03/Chicken-Pizza.jpg", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 4, name: "Small Egg Pizza", category: "pizza", price: 530, image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/eggs-florentine-pizza-2adefac.jpg", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            { id: 1, name: "Egg Pizza Medium", category: "pizza", price: 800, image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/eggs-florentine-pizza-2adefac.jpg", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 2, name: "Mushroom Pizza", category: "pizza", price: 1200, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXMJhWv-cYtmjjVABnTIS72-XmKUaJaBSrUg&s", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 3, name: "Huge Bumper Pizza", category: "pizza", price: 2280, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXMJhWv-cYtmjjVABnTIS72-XmKUaJaBSrUg&s", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 4, name: "Large Spicy Pizza", category: "pizza", price: 2300, image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&fit=crop", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            
+
+            //burger
+            { id: 1, name: "Burger", category: "burger", price: 320, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&fit=crop", desc: "Aromatic basmati rice with tender chicken", dietary: "non-veg", rating: 4.5, popular: true, offers: ["15% Off"] },
+            { id: 2, name: "Mutton Burger", category: "burger", price: 550, image: "https://www.allrecipes.com/thmb/nTxADEGhsHNQyBTUzmtyppeoc5g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/236679-lamb-burgers-3x4-487-c2045575a34c450fb60fc37ceffe5854.jpg", desc: "Slow-cooked mutton, rich spices", dietary: "non-veg", rating: 4.7, popular: true, offers: ["Free Salad"] },
+            { id: 3, name: "Veg Burger", category: "burger", price: 280, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkyyRsR0vXAUGIS7sw7F9It_yzioyMBs1epw&s", desc: "Fresh garden vegetables & herbs", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 4, name: "Egg Burger", category: "burger", price: 300, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmcix1Ds43WsdvaD1dsU0dBSOojhhBGbo3jw&s", desc: "Spicy boiled eggs layered with rice", dietary: "veg", rating: 4.3, popular: true, offers: ["10% Off"] },
+            
+            // Drinks
+            { id: 16, name: "Mango Lassi", category: "drinks", price: 150, image: "https://www.midwestliving.com/thmb/2n9egOlUYE0dnPxJoHYY7disquI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/KeyIngredient_MangoLassi_BP_1019_preview-0bdf9f28d35043748efaa9fd1c7b806c.jpg", desc: "Sweet yogurt drink", dietary: "veg", rating: 4.6, popular: true, offers: [] },
+            { id: 16, name: "Banana Lassi", category: "drinks", price: 180, image: "https://www.awesomecuisine.com/wp-content/uploads/2016/06/Banana-Lassi.jpg", desc: "Sweet banana drink", dietary: "veg", rating: 4.5, popular: true, offers: [] },
+            { id: 16, name: "Chocolate Lassi", category: "drinks", price: 190, image: "https://5.imimg.com/data5/QR/EK/GLADMIN-28464664/chocolate-lassi.png", desc: "Sweet yogurt drink", dietary: "veg", rating: 4.6, popular: true, offers: [] },
+            { id: 17, name: "Iced Tea", category: "drinks", price: 120, image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400&fit=crop", desc: "Lemon mint", dietary: "veg", rating: 4.2, popular: false, offers: [] },
+            { id: 18, name: "Black Coffee", category: "drinks", price: 100, image: "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=400&fit=crop", desc: "Fresh brewed", dietary: "veg", rating: 4.4, popular: false, offers: [] },
+        ];
+
+        // Cuisine data 
+        const cuisines = [
+            { id: 'all', name: 'All', icon: 'fa-th-large', image: 'https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=150&h=150&fit=crop', count: 18 },
+            { id: 'biryani', name: 'Biryani', icon: 'fa-utensils', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&h=150&fit=crop', count: 4 },
+            { id: 'momo', name: 'Momo', icon: 'fa-dumpling', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=150&h=150&fit=crop', count: 5 },
+            { id: 'indian', name: 'Indian', icon: 'fa-utensil-spoon', image: 'https://img.teletext.com/images/5_traditional_indian_dishes_you_must_try_88b7ec9815.jpg', count: 3 },
+            { id: 'pizza', name: 'Pizza', icon: 'fa-mountain', image: 'https://lh6.googleusercontent.com/proxy/zuMyN3Mu_0cEJQ_duyFrgOhBZzh3zXgTNWdzoRhnuDMEVcU4hG5Q8xbo5OjMO81gehXJnMCqJ-XvTBntahbufHUcZYF1F2xIOm7TLE_iGg', count: 3 },
+            { id: 'burger', name: 'Burger', icon: 'fa-mountain', image: 'https://www.foodandwine.com/thmb/XE8ubzwObCIgMw7qJ9CsqUZocNM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MSG-Smash-Burger-FT-RECIPE0124-d9682401f3554ef683e24311abdf342b.jpg', count: 3 },
+            { id: 'chinese', name: 'Chinese', icon: 'fa-mountain', image: 'https://www.china-admissions.com/wp-content/uploads/2020/02/Chinese-food.jpg', count: 3 },
+            { id: 'kebab', name: 'Kebab', icon: 'fa-mountain', image: 'https://cookingorgeous.com/wp-content/uploads/2021/06/lamb-shish-kebab-20.jpg', count: 3 },
+            
+            { id: 'drinks', name: 'Drinks', icon: 'fa-coffee', image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=150&h=150&fit=crop', count: 3 }
+        ];
+
+        // ---------- GLOBAL CART STATE ----------
+        let cart = []; // { id, name, price, quantity, image }
+        let selectedTable = null;
+
+        // Application State
+        let appState = {
+            currentLocation: {
+                address: "Thamel, Kathmandu",
+                latitude: 27.7172,
+                longitude: 85.3240
+            },
+            selectedCuisine: 'all',
+            filters: {
+                sortBy: ['nearest'],
+                showOffers: false,
+                minRating: 4.0,
+                maxPrice: 2000,
+                dietary: [],
+                priceSort: null // 'low-high' or 'high-low'
+            },
+            filteredDishes: [...DISHES],
+            map: null,
+            marker: null
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Testimonial auto-scroll functionality
+            const testimonialTrack = document.getElementById('testimonial-track');
+            let testimonialAutoScroll;
+            
+            if (testimonialTrack) {
+                function setupTestimonialAutoScroll() {
+                    if (testimonialAutoScroll) {
+                        clearInterval(testimonialAutoScroll);
+                    }
+                    testimonialAutoScroll = setInterval(() => {
+                        const firstSlide = testimonialTrack.firstElementChild;
+                        testimonialTrack.appendChild(firstSlide);
+                    }, 2000);
+                }
+                setupTestimonialAutoScroll();
+                
+                testimonialTrack.addEventListener('mouseenter', () => {
+                    if (testimonialAutoScroll) {
+                        clearInterval(testimonialAutoScroll);
+                    }
+                });
+                
+                testimonialTrack.addEventListener('mouseleave', () => {
+                    setupTestimonialAutoScroll();
+                });
+            }
+
+            // Scroll animation for Mac & Cheese section
+            const macCheeseSection = document.getElementById('mac-cheese-section');
+            const macCheeseElements = macCheeseSection.querySelectorAll('.scroll-in-animation');
+            
+            function checkScroll() {
+                const triggerBottom = window.innerHeight * 0.8;
+                macCheeseElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < triggerBottom) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            checkScroll();
+            window.addEventListener('scroll', checkScroll);
+
+            // Function to scroll to restaurant search section
+            function scrollToRestaurantSearch() {
+                const restaurantSection = document.getElementById('restaurant-search-section');
+                if (restaurantSection) {
+                    restaurantSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            // Add event listeners for all "Order Now" buttons
+            document.querySelectorAll('#promo-order-now, #mac-order-now, #footer-order-now').forEach(button => {
+                button.addEventListener('click', scrollToRestaurantSearch);
+            });
+
+            // Hero search functionality 
+            const heroSearchInput = document.getElementById('hero-search-input');
+            const heroSearchButton = document.getElementById('hero-search-button');
+            const nfdSearchInput = document.getElementById('nfd-search-input');
+            const nfdSearchButton = document.getElementById('nfd-search-button');
+
+            // Food tag click functionality
+            const foodTags = document.querySelectorAll('.food-tag');
+            foodTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const foodType = this.getAttribute('data-food');
+                    heroSearchInput.value = foodType;
+                    heroSearchInput.focus();
+                });
+            });
+
+            function performSearch(searchTerm) {
+                scrollToRestaurantSearch();
+                
+                if (nfdSearchInput) {
+                    nfdSearchInput.value = searchTerm;
+                }
+                
+                if (searchTerm.trim()) {
+                    const filtered = DISHES.filter(dish => 
+                        dish.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        dish.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        dish.desc.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                    
+                    appState.filteredDishes = filtered;
+                    renderDishes();
+                    
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed top-20 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-in-right';
+                    notification.innerHTML = `<strong>Search Results:</strong> Found ${filtered.length} dishes for "${searchTerm}"`;
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                        setTimeout(() => {
+                            if (document.body.contains(notification)) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 300);
+                    }, 3000);
+                }
+            }
+
+            if (heroSearchButton && heroSearchInput) {
+                heroSearchButton.addEventListener('click', () => {
+                    const searchTerm = heroSearchInput.value.trim();
+                    if (searchTerm) {
+                        performSearch(searchTerm);
+                    }
+                });
+                
+                heroSearchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchTerm = heroSearchInput.value.trim();
+                        if (searchTerm) {
+                            performSearch(searchTerm);
+                        }
+                    }
+                });
+            }
+
+            if (nfdSearchButton && nfdSearchInput) {
+                nfdSearchButton.addEventListener('click', () => {
+                    const searchTerm = nfdSearchInput.value.trim();
+                    if (searchTerm) {
+                        performSearch(searchTerm);
+                    }
+                });
+                
+                nfdSearchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchTerm = nfdSearchInput.value.trim();
+                        if (searchTerm) {
+                            performSearch(searchTerm);
+                        }
+                    }
+                });
+            }
+
+           
+            renderCuisines();
+            renderDishes();
+            initializeLocation();
+            
+            const mobileFilterBtn = document.getElementById('mobile-filter-btn');
+            const closeSidebarBtn = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const priceSlider = document.getElementById('price-range');
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            const clearFiltersBtn = document.getElementById('clear-filters');
+            const locationInput = document.getElementById('location-input');
+            const currentLocationBtn = document.getElementById('current-location-btn');
+            const locationDisplay = document.getElementById('location-display');
+            const changeLocationBtn = document.getElementById('change-location');
+            const mapContainer = document.getElementById('map-container');
+            const priceLowHighBtn = document.getElementById('price-low-high');
+            const priceHighLowBtn = document.getElementById('price-high-low');
+            const priceTooltip = document.getElementById('price-tooltip');
+            
+            // --- Google Maps Autocomplete ---
+            if (locationInput && typeof google !== 'undefined' && google.maps && google.maps.places) {
+                const autocomplete = new google.maps.places.Autocomplete(locationInput, {
+                    types: ['geocode'],
+                    componentRestrictions: { country: 'np' }
+                });
+                
+                autocomplete.addListener('place_changed', () => {
+                    const place = autocomplete.getPlace();
+                    if (place.geometry) {
+                        updateLocation({
+                            address: place.formatted_address || place.name,
+                            latitude: place.geometry.location.lat(),
+                            longitude: place.geometry.location.lng()
+                        });
+                    }
+                });
+            }
+            
+            // Mobile Filter Button
+            if (mobileFilterBtn) {
+                mobileFilterBtn.addEventListener('click', () => {
+                    sidebar.classList.remove('hidden');
+                    sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-40', 'bg-[#111111]', 'w-3/4', 'max-w-xs', 'shadow-2xl');
+                    overlay.classList.remove('hidden');
+                });
+            }
+            
+            // Current Location Button
+            if (currentLocationBtn) {
+                currentLocationBtn.addEventListener('click', getCurrentLocation);
+            }
+            
+            // Change Location Button
+            if (changeLocationBtn) {
+                changeLocationBtn.addEventListener('click', () => {
+                    locationDisplay.classList.add('hidden');
+                    locationInput.classList.remove('hidden');
+                    mapContainer.classList.add('hidden');
+                    locationInput.focus();
+                });
+            }
+            
+            // Filter Controls
+            if (applyFiltersBtn) {
+                applyFiltersBtn.addEventListener('click', applyFilters);
+            }
+            
+            if (clearFiltersBtn) {
+                clearFiltersBtn.addEventListener('click', clearFilters);
+            }
+            
+            // Sort checkboxes
+            document.querySelectorAll('.sort-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', updateSortFilter);
+            });
+            
+            // Dietary checkboxes
+            document.querySelectorAll('.dietary-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', updateDietaryFilter);
+            });
+            
+            // Offer checkbox
+            const showOffersCheckbox = document.getElementById('show-offers');
+            if (showOffersCheckbox) {
+                showOffersCheckbox.addEventListener('change', (e) => {
+                    appState.filters.showOffers = e.target.checked;
+                });
+            }
+            
+            // Rating checkboxes
+            const rating40 = document.getElementById('rating-4.0');
+            const rating35 = document.getElementById('rating-3.5');
+            const rating30 = document.getElementById('rating-3.0');
+            
+            if (rating40) rating40.addEventListener('change', updateRatingFilter);
+            if (rating35) rating35.addEventListener('change', updateRatingFilter);
+            if (rating30) rating30.addEventListener('change', updateRatingFilter);
+            
+            // Price range slider with tooltip
+            if (priceSlider) {
+                priceSlider.addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    appState.filters.maxPrice = value;
+                    
+                    const percent = (value - priceSlider.min) / (priceSlider.max - priceSlider.min) * 100;
+                    if (priceTooltip) {
+                        priceTooltip.textContent = `Nrs. ${value}`;
+                        priceTooltip.style.left = `${percent}%`;
+                    }
+                    
+                    e.target.style.background = `linear-gradient(to right, #DC2626 0%, #DC2626 ${percent}%, #333 ${percent}%, #333 100%)`;
+                    
+                    const currentPriceEl = document.getElementById('current-price');
+                    if (currentPriceEl) {
+                        currentPriceEl.textContent = `Current: Nrs. ${value}`;
+                    }
+                });
+                
+                const initialValue = parseInt(priceSlider.value);
+                const initialPercent = (initialValue - priceSlider.min) / (priceSlider.max - priceSlider.min) * 100;
+                priceSlider.style.background = `linear-gradient(to right, #DC2626 0%, #DC2626 ${initialPercent}%, #333 ${initialPercent}%, #333 100%)`;
+                if (priceTooltip) {
+                    priceTooltip.style.left = `${initialPercent}%`;
+                }
+            }
+            
+            // Price sort buttons
+            if (priceLowHighBtn) {
+                priceLowHighBtn.addEventListener('click', () => {
+                    appState.filters.priceSort = 'low-high';
+                    priceLowHighBtn.classList.add('bg-red-500', 'text-white');
+                    priceLowHighBtn.classList.remove('bg-[#1a1a1a]', 'text-gray-300');
+                    if (priceHighLowBtn) {
+                        priceHighLowBtn.classList.remove('bg-red-500', 'text-white');
+                        priceHighLowBtn.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+                    }
+                    applyFilters();
+                });
+            }
+            
+            if (priceHighLowBtn) {
+                priceHighLowBtn.addEventListener('click', () => {
+                    appState.filters.priceSort = 'high-low';
+                    priceHighLowBtn.classList.add('bg-red-500', 'text-white');
+                    priceHighLowBtn.classList.remove('bg-[#1a1a1a]', 'text-gray-300');
+                    if (priceLowHighBtn) {
+                        priceLowHighBtn.classList.remove('bg-red-500', 'text-white');
+                        priceLowHighBtn.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+                    }
+                    applyFilters();
+                });
+            }
+            
+           
+            function toggleSidebar() {
+                const isHidden = sidebar.classList.contains('hidden');
+                if (isHidden) {
+                    sidebar.classList.remove('hidden');
+                    sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-40', 'bg-[#111111]', 'w-3/4', 'max-w-xs', 'shadow-2xl');
+                    if (overlay) overlay.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('hidden');
+                    sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-40', 'bg-[#111111]', 'w-3/4', 'max-w-xs', 'shadow-2xl');
+                    if (overlay) overlay.classList.add('hidden');
+                }
+            }
+
+            if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', toggleSidebar);
+            if (overlay) overlay.addEventListener('click', toggleSidebar);
+            
+            const header = document.querySelector('header');
+            
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        header.classList.add('sticky', 'translucent');
+                    } else {
+                        header.classList.remove('sticky', 'translucent');
+                    }
+                });
+            }
+
+            // Mobile menu 
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenu = document.getElementById('close-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times text-xl"></i>';
+                    mobileMenuBtn.setAttribute('data-open', 'true');
+                });
+            }
+
+            if (closeMenu && mobileMenu) {
+                closeMenu.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+                        mobileMenuBtn.setAttribute('data-open', 'false');
+                    }
+                });
+            }
+
+            const mobileMenuLinks = mobileMenu ? mobileMenu.querySelectorAll('a, button') : [];
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+                        mobileMenuBtn.setAttribute('data-open', 'false');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (mobileMenu && mobileMenu.classList.contains('active') && 
+                    !mobileMenu.contains(e.target) && 
+                    !mobileMenuBtn.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+                        mobileMenuBtn.setAttribute('data-open', 'false');
+                    }
+                }
+            });
+
+            // Modal functionality
+            const loginModal = document.getElementById('login-modal');
+            const restaurantModal = document.getElementById('restaurant-modal');
+            const deliveryModal = document.getElementById('delivery-modal');
+            
+            const loginBtn = document.getElementById('login-btn');
+            const mobileLoginBtn = document.getElementById('mobile-login-btn');
+            const closeLoginModal = document.getElementById('close-login-modal');
+            
+            function openLoginModal() {
+                if (loginModal) {
+                    loginModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            function closeLoginModalFunc() {
+                if (loginModal) {
+                    loginModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (loginBtn) loginBtn.addEventListener('click', openLoginModal);
+            if (mobileLoginBtn) mobileLoginBtn.addEventListener('click', openLoginModal);
+            if (closeLoginModal) closeLoginModal.addEventListener('click', closeLoginModalFunc);
+            
+            const restaurantBtn = document.getElementById('restaurant-partner-btn');
+            const mobileRestaurantBtn = document.getElementById('mobile-restaurant-btn');
+            const closeRestaurantModal = document.getElementById('close-restaurant-modal');
+            
+            function openRestaurantModal() {
+                if (restaurantModal) {
+                    restaurantModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            function closeRestaurantModalFunc() {
+                if (restaurantModal) {
+                    restaurantModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (restaurantBtn) restaurantBtn.addEventListener('click', openRestaurantModal);
+            if (mobileRestaurantBtn) mobileRestaurantBtn.addEventListener('click', openRestaurantModal);
+            if (closeRestaurantModal) closeRestaurantModal.addEventListener('click', closeRestaurantModalFunc);
+            
+            const deliveryBtn = document.getElementById('delivery-partner-btn');
+            const mobileDeliveryBtn = document.getElementById('mobile-delivery-btn');
+            const closeDeliveryModal = document.getElementById('close-delivery-modal');
+            
+            function openDeliveryModal() {
+                if (deliveryModal) {
+                    deliveryModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            function closeDeliveryModalFunc() {
+                if (deliveryModal) {
+                    deliveryModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (deliveryBtn) deliveryBtn.addEventListener('click', openDeliveryModal);
+            if (mobileDeliveryBtn) mobileDeliveryBtn.addEventListener('click', openDeliveryModal);
+            if (closeDeliveryModal) closeDeliveryModal.addEventListener('click', closeDeliveryModalFunc);
+            
+            [loginModal, restaurantModal, deliveryModal].forEach(modal => {
+                if (modal) {
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                    });
+                }
+            });
+            
+            const switchToSignup = document.getElementById('switch-to-signup');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            
+            if (switchToSignup && loginForm && signupForm) {
+                switchToSignup.addEventListener('click', () => {
+                    loginForm.classList.add('hidden');
+                    signupForm.classList.remove('hidden');
+                });
+            }
+            
+            if (switchToLogin && loginForm && signupForm) {
+                switchToLogin.addEventListener('click', () => {
+                    signupForm.classList.add('hidden');
+                    loginForm.classList.remove('hidden');
+                });
+            }
+            
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Login successful!');
+                    closeLoginModalFunc();
+                });
+            }
+            
+            if (signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Account created successfully!');
+                    closeLoginModalFunc();
+                });
+            }
+            
+            // Dish carousel functionality
+            const dishesContainer = document.getElementById('dishes-container');
+            let dishCards = [];
+            let currentDishIndex = 0;
+            
+            if (dishesContainer) {
+                dishCards = Array.from(dishesContainer.children);
+                
+                function updateDishesDisplay() {
+                    dishCards.forEach((card, index) => {
+                        if (window.innerWidth < 768) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.remove('hidden');
+                        }
+                    });
+                }
+                
+                function nextDish() {
+                    currentDishIndex = (currentDishIndex + 1) % dishCards.length;
+                    updateDishesDisplay();
+                }
+                
+                function prevDish() {
+                    currentDishIndex = (currentDishIndex - 1 + dishCards.length) % dishCards.length;
+                    updateDishesDisplay();
+                }
+                
+                const prevDishBtn = document.getElementById('prev-dish') || document.getElementById('prev-dish-mobile');
+                const nextDishBtn = document.getElementById('next-dish') || document.getElementById('next-dish-mobile');
+                
+                if (prevDishBtn) prevDishBtn.addEventListener('click', prevDish);
+                if (nextDishBtn) nextDishBtn.addEventListener('click', nextDish);
+                
+                updateDishesDisplay();
+                window.addEventListener('resize', updateDishesDisplay);
+            }
+
+            // Testimonial auto-slider functionality
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            
+            if (testimonialTrack && testimonialSlides.length > 0) {
+                function updateTestimonialDisplay() {
+                    if (window.innerWidth < 768) {
+                        testimonialSlides.forEach(slide => {
+                            slide.style.minWidth = '250px';
+                            slide.style.width = '250px';
+                        });
+                    } else {
+                        testimonialSlides.forEach(slide => {
+                            slide.style.minWidth = '25%';
+                            slide.style.width = '25%';
+                        });
+                    }
+                }
+                
+                updateTestimonialDisplay();
+                window.addEventListener('resize', updateTestimonialDisplay);
+            }
+
+            // Parallax gliding effect for the image
+            const deliveryBg = document.querySelector('.delivery-bg');
+            
+            if (deliveryBg) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * 0.3;
+                    deliveryBg.style.transform = `translate3d(0, ${rate}px, 0)`;
+                });
+            }
+
+            // Category filter event listeners
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    document.querySelectorAll('.category-filter').forEach(b => {
+                        b.classList.remove('bg-red-500', 'text-white');
+                        b.classList.add('bg-gray-800', 'text-gray-300');
+                    });
+                    this.classList.add('bg-red-500', 'text-white');
+                    this.classList.remove('bg-gray-800', 'text-gray-300');
+                    const cat = this.dataset.cat;
+                    appState.selectedCuisine = cat;
+                    applyFilters();
+                });
+            });
+
+            // ---------- CART OPERATIONS ----------
+            function addToCart(dishId, dishName, dishPrice, dishImage) {
+                const existing = cart.find(item => item.id === dishId);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ id: dishId, name: dishName, price: dishPrice, image: dishImage, quantity: 1 });
+                }
+                updateQuantityDisplay(dishId);
+                updateCartUI();
+                showAddNotification(dishName);
+            }
+
+            function decrementItem(dishId) {
+                const item = cart.find(i => i.id === dishId);
+                if (item) {
+                    if (item.quantity > 1) {
+                        item.quantity -= 1;
+                    } else {
+                        cart = cart.filter(i => i.id !== dishId);
+                    }
+                    updateQuantityDisplay(dishId);
+                    updateCartUI();
+                }
+            }
+
+            function updateQuantityDisplay(dishId) {
+                const qtySpan = document.getElementById(`qty-${dishId}`);
+                if (qtySpan) {
+                    const cartItem = cart.find(i => i.id === dishId);
+                    qtySpan.innerText = cartItem ? cartItem.quantity : '0';
+                }
+            }
+
+            function refreshAllQuantities() {
+                DISHES.forEach(d => {
+                    const el = document.getElementById(`qty-${d.id}`);
+                    if (el) {
+                        const found = cart.find(i => i.id === d.id);
+                        el.innerText = found ? found.quantity : '0';
+                    }
+                });
+            }
+
+            function updateCartUI() {
+                const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
+                const cartCountBadge = document.getElementById('cart-count-badge');
+                const mobileCartCount = document.getElementById('mobile-cart-count');
+                const mobileCartSummaryBadge = document.getElementById('mobile-cart-summary-badge');
+                
+                if (cartCountBadge) cartCountBadge.innerText = totalItems;
+                if (mobileCartCount) mobileCartCount.innerText = totalItems;
+                if (mobileCartSummaryBadge) mobileCartSummaryBadge.innerText = totalItems;
+
+                const totalPrice = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+                const cartTotalEl = document.getElementById('cart-total-price');
+                if (cartTotalEl) cartTotalEl.innerText = `Nrs. ${totalPrice}`;
+
+                const cartItemsContainer = document.getElementById('cart-items-container');
+                if (cartItemsContainer) {
+                    if (cart.length === 0) {
+                        cartItemsContainer.innerHTML = '<div class="text-center py-6 text-gray-400"><i class="fas fa-shopping-basket text-3xl mb-2"></i><p>Your cart is empty</p></div>';
+                    } else {
+                        let html = '';
+                        cart.forEach(item => {
+                            html += `
+                                <div class="flex items-center justify-between bg-gray-900 p-3 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <img src="${item.image}" class="w-12 h-12 rounded-md object-cover" alt="${item.name}">
+                                        <div>
+                                            <h5 class="font-semibold">${item.name}</h5>
+                                            <span class="text-sm text-red-500">Nrs. ${item.price} x ${item.quantity}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button class="cart-inc w-8 h-8 rounded-full bg-gray-700 hover:bg-red-500 flex items-center justify-center" data-id="${item.id}">+</button>
+                                        <span class="w-5 text-center">${item.quantity}</span>
+                                        <button class="cart-dec w-8 h-8 rounded-full bg-gray-700 hover:bg-red-500 flex items-center justify-center" data-id="${item.id}">-</button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        cartItemsContainer.innerHTML = html;
+                    }
+                }
+                attachCartModalEvents();
+            }
+
+            function attachCartModalEvents() {
+                document.querySelectorAll('.cart-inc').forEach(btn => {
+                    btn.removeEventListener('click', handleCartInc);
+                    btn.addEventListener('click', handleCartInc);
+                });
+                document.querySelectorAll('.cart-dec').forEach(btn => {
+                    btn.removeEventListener('click', handleCartDec);
+                    btn.addEventListener('click', handleCartDec);
+                });
+            }
+            
+            function handleCartInc(e) {
+                const id = parseInt(e.currentTarget.dataset.id);
+                const item = cart.find(i => i.id === id);
+                if (item) { item.quantity += 1; updateQuantityDisplay(id); updateCartUI(); }
+            }
+            
+            function handleCartDec(e) {
+                const id = parseInt(e.currentTarget.dataset.id);
+                decrementItem(id);
+                updateCartUI();
+                refreshAllQuantities();
+            }
+
+            function showAddNotification(name) {
+                const notif = document.createElement('div');
+                notif.className = 'fixed top-20 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-slide-in-right text-sm';
+                notif.innerHTML = `<i class="fas fa-check-circle mr-1"></i> ${name} added`;
+                document.body.appendChild(notif);
+                setTimeout(() => notif.remove(), 2000);
+            }
+
+            // ---------- EVENT DELEGATION for +/- and Add buttons ----------
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('inc-btn') || e.target.closest('.inc-btn')) {
+                    const btn = e.target.classList.contains('inc-btn') ? e.target : e.target.closest('.inc-btn');
+                    const id = parseInt(btn.dataset.id);
+                    const dish = DISHES.find(d => d.id === id);
+                    if (dish) addToCart(dish.id, dish.name, dish.price, dish.image);
+                }
+                if (e.target.classList.contains('dec-btn') || e.target.closest('.dec-btn')) {
+                    const btn = e.target.classList.contains('dec-btn') ? e.target : e.target.closest('.dec-btn');
+                    const id = parseInt(btn.dataset.id);
+                    decrementItem(id);
+                    refreshAllQuantities();
+                }
+                if (e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn')) {
+                    const btn = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
+                    const id = parseInt(btn.dataset.id);
+                    const name = btn.dataset.name;
+                    const price = parseInt(btn.dataset.price);
+                    const image = btn.dataset.image;
+                    addToCart(id, name, price, image);
+                }
+            });
+
+            // ---------- TABLE NUMBER GENERATION (1-10) ----------
+            const tableGrid = document.getElementById('table-number-grid');
+            if (tableGrid) {
+                for (let i = 1; i <= 10; i++) {
+                    const chip = document.createElement('span');
+                    chip.className = 'table-chip';
+                    chip.dataset.table = i;
+                    chip.innerText = `Table ${i}`;
+                    chip.addEventListener('click', function() {
+                        document.querySelectorAll('.table-chip').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedTable = parseInt(this.dataset.table);
+                        const selectedTableDisplay = document.getElementById('selected-table-display');
+                        if (selectedTableDisplay) selectedTableDisplay.innerText = `Table ${selectedTable}`;
+                    });
+                    tableGrid.appendChild(chip);
+                }
+            }
+
+            // ---------- CART MODAL OPEN/CLOSE ----------
+            function openCartModal() {
+                const cartModal = document.getElementById('cart-modal');
+                if (cartModal) {
+                    cartModal.classList.add('active');
+                    updateCartUI();
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            function closeCartModal() {
+                const cartModal = document.getElementById('cart-modal');
+                if (cartModal) {
+                    cartModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            const cartIconHeader = document.getElementById('cart-icon-header');
+            const viewCartSummary = document.getElementById('view-cart-summary');
+            const mobileCartBtn = document.getElementById('mobile-cart-btn');
+            const closeCartModalBtn = document.getElementById('close-cart-modal');
+            
+            if (cartIconHeader) cartIconHeader.addEventListener('click', openCartModal);
+            if (viewCartSummary) viewCartSummary.addEventListener('click', openCartModal);
+            if (mobileCartBtn) {
+                mobileCartBtn.addEventListener('click', function() {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu) mobileMenu.classList.remove('active');
+                    openCartModal();
+                });
+            }
+            if (closeCartModalBtn) closeCartModalBtn.addEventListener('click', closeCartModal);
+            
+            const cartModal = document.getElementById('cart-modal');
+            if (cartModal) {
+                cartModal.addEventListener('click', (e) => { if (e.target === cartModal) closeCartModal(); });
+            }
+
+            // ---------- WHATSAPP ORDER ----------
+            const whatsappOrderBtn = document.getElementById('whatsapp-order-btn');
+            if (whatsappOrderBtn) {
+                whatsappOrderBtn.addEventListener('click', function() {
+                    if (cart.length === 0) {
+                        alert('Your cart is empty!');
+                        return;
+                    }
+                    if (!selectedTable) {
+                        alert('Please select a table number.');
+                        return;
+                    }
+                    
+                    let orderSummary = '🍽️ *Bhok Express Order* 🍽️\n';
+                    orderSummary += `Table: ${selectedTable}\n\n`;
+                    cart.forEach(item => {
+                        orderSummary += `• ${item.name} x${item.quantity} = Nrs. ${item.price * item.quantity}\n`;
+                    });
+                    const total = cart.reduce((s,i) => s + i.price * i.quantity, 0);
+                    orderSummary += `\n*Total: Nrs. ${total}*\n\nThank you!`;
+                    
+                    const encoded = encodeURIComponent(orderSummary);
+                    const whatsappURL = `https://wa.me/9779708095535?text=${encoded}`;
+                    window.open(whatsappURL, '_blank');
+                    closeCartModal();
+                });
+            }
+
+            // Set all quantity displays to 0 initially
+            setTimeout(() => {
+                DISHES.forEach(d => {
+                    const el = document.getElementById(`qty-${d.id}`);
+                    if (el) el.innerText = '0';
+                });
+            }, 20);
+        });
+        
+        // --- Nepali Food Delivery Core Functions ---
+        
+        function initializeLocation() {
+            const locationDisplay = document.getElementById('location-display');
+            const currentAddress = document.getElementById('current-address');
+            const locationInput = document.getElementById('location-input');
+            
+            if (locationDisplay && currentAddress && locationInput) {
+                locationDisplay.classList.remove('hidden');
+                currentAddress.textContent = appState.currentLocation.address;
+                locationInput.classList.add('hidden');
+                initializeMap();
+            }
+        }
+        
+        function initializeMap() {
+            const mapElement = document.getElementById('map');
+            if (!mapElement || appState.map) return;
+            
+            if (typeof google === 'undefined' || !google.maps) {
+                console.error('Google Maps API not loaded');
+                return;
+            }
+            
+            const location = appState.currentLocation;
+            
+            appState.map = new google.maps.Map(mapElement, {
+                center: { lat: location.latitude, lng: location.longitude },
+                zoom: 15,
+                mapTypeControl: false,
+                streetViewControl: false,
+                fullscreenControl: false,
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
+            });
+            
+            appState.marker = new google.maps.Marker({
+                position: { lat: location.latitude, lng: location.longitude },
+                map: appState.map,
+                title: "Your Location",
+                icon: {
+                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                }
+            });
+        }
+        
+        function updateLocation(locationData) {
+            appState.currentLocation = locationData;
+            
+            const locationDisplay = document.getElementById('location-display');
+            const currentAddress = document.getElementById('current-address');
+            const locationInput = document.getElementById('location-input');
+            const mapContainer = document.getElementById('map-container');
+            
+            if (locationDisplay && currentAddress && locationInput) {
+                currentAddress.textContent = locationData.address;
+                locationInput.value = '';
+                locationDisplay.classList.remove('hidden');
+                locationInput.classList.add('hidden');
+                if (mapContainer) mapContainer.classList.remove('hidden');
+                
+                if (appState.map && appState.marker) {
+                    const newLatLng = new google.maps.LatLng(locationData.latitude, locationData.longitude);
+                    appState.map.setCenter(newLatLng);
+                    appState.marker.setPosition(newLatLng);
+                } else {
+                    initializeMap();
+                }
+            }
+            
+            applyFilters();
+        }
+        
+        function getCurrentLocation() {
+            const locationDisplay = document.getElementById('location-display');
+            const locationInput = document.getElementById('location-input');
+            const currentLocationBtn = document.getElementById('current-location-btn');
+            
+            if (currentLocationBtn) {
+                currentLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                currentLocationBtn.disabled = true;
+            }
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        
+                        const nepalAddresses = [
+                            "Thamel, Kathmandu",
+                            "Patan, Lalitpur",
+                            "Bhaktapur Durbar Square",
+                            "Boudha, Kathmandu",
+                            "New Road, Kathmandu",
+                            "Jhamsikhel, Lalitpur",
+                            "Kirtipur, Kathmandu"
+                        ];
+                        
+                        const randomAddress = nepalAddresses[Math.floor(Math.random() * nepalAddresses.length)];
+                        
+                        updateLocation({
+                            address: randomAddress,
+                            latitude: latitude,
+                            longitude: longitude
+                        });
+                        
+                        if (currentLocationBtn) {
+                            currentLocationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i>';
+                            currentLocationBtn.disabled = false;
+                        }
+                    },
+                    (error) => {
+                        console.error("Geolocation error:", error);
+                        
+                        updateLocation({
+                            address: "Thamel, Kathmandu",
+                            latitude: 27.7172,
+                            longitude: 85.3240
+                        });
+                        
+                        if (currentLocationBtn) {
+                            currentLocationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i>';
+                            currentLocationBtn.disabled = false;
+                        }
+                        
+                        alert("Unable to get your location. Using Kathmandu as default.");
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by your browser. Using Kathmandu as default.");
+                updateLocation({
+                    address: "Thamel, Kathmandu",
+                    latitude: 27.7172,
+                    longitude: 85.3240
+                });
+            }
+        }
+        
+        function renderCuisines() {
+            const cuisineList = document.getElementById('cuisine-list');
+            if (!cuisineList) return;
+            
+            cuisineList.innerHTML = '';
+            
+            cuisines.forEach(cuisine => {
+                const isActive = appState.selectedCuisine === cuisine.id;
+                const cuisineElement = document.createElement('div');
+                cuisineElement.className = `flex flex-col items-center gap-2 min-w-[80px] cursor-pointer transition-all duration-200 cuisine-item ${isActive ? 'active-cuisine' : ''}`;
+                cuisineElement.dataset.cuisine = cuisine.id;
+                
+                cuisineElement.innerHTML = `
+                    <div class="w-16 h-16 rounded-full overflow-hidden border ${isActive ? 'border-2 border-red-500' : 'border-gray-700'} shadow-sm group-hover:shadow-md transition cuisine-image">
+                        <img src="${cuisine.image}" class="w-full h-full object-cover" alt="${cuisine.name}">
+                    </div>
+                    <span class="text-xs font-medium ${isActive ? 'text-red-500 font-bold' : 'text-gray-400'}">
+                        ${cuisine.name}
+                    </span>
+                    <span class="text-[10px] ${isActive ? 'text-red-500' : 'text-gray-500'}">
+                        ${cuisine.count} items
+                    </span>
+                `;
+                
+                cuisineElement.addEventListener('click', () => {
+                    appState.selectedCuisine = cuisine.id;
+                    renderCuisines();
+                    applyFilters();
+                });
+                
+                cuisineList.appendChild(cuisineElement);
+            });
+        }
+        
+        function renderDishes(dishes = appState.filteredDishes) {
+            const container = document.getElementById('restaurants-container');
+            const countElement = document.getElementById('restaurant-count');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const noResults = document.getElementById('no-results');
+            const activeFilter = document.getElementById('active-filter');
+            
+            if (!container || !countElement || !loadingSpinner || !noResults) return;
+            
+            loadingSpinner.classList.remove('hidden');
+            container.innerHTML = '';
+            
+            setTimeout(() => {
+                if (dishes.length === 0) {
+                    container.classList.add('hidden');
+                    noResults.classList.remove('hidden');
+                    if (activeFilter) activeFilter.classList.add('hidden');
+                } else {
+                    container.classList.remove('hidden');
+                    noResults.classList.add('hidden');
+                    
+                    if (activeFilter && appState.selectedCuisine !== 'all') {
+                        const activeCuisine = cuisines.find(c => c.id === appState.selectedCuisine);
+                        const filterSpan = activeFilter.querySelector('span');
+                        if (filterSpan) {
+                            filterSpan.textContent = `${activeCuisine.name} (${dishes.length})`;
+                        }
+                        activeFilter.classList.remove('hidden');
+                    } else if (activeFilter) {
+                        activeFilter.classList.add('hidden');
+                    }
+                    
+                    dishes.forEach(dish => {
+                        const card = document.createElement('div');
+                        card.className = 'dish-card';
+                        
+                        card.innerHTML = `
+                            <div class="relative h-40 md:h-44 overflow-hidden">
+                                <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <span class="absolute top-2 left-2 bg-black/70 text-[10px] px-2 py-1 rounded-full ${dish.dietary === 'non-veg' ? 'text-red-400' : 'text-green-400'} border border-red-500/30">
+                                    ${dish.dietary === 'non-veg' ? '<i class="fas fa-drumstick-bite mr-1"></i>Non-veg' : '<i class="fas fa-leaf mr-1 text-green-400"></i>Veg'}
+                                </span>
+                                ${dish.popular ? '<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">Popular</span>' : ''}
+                                ${dish.offers && dish.offers.length > 0 ? `<span class="absolute bottom-2 left-2 bg-green-600 text-white text-[8px] font-bold px-2 py-1 rounded-full">${dish.offers[0]}</span>` : ''}
+                            </div>
+                            <div class="p-4 flex flex-col flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">${dish.name}</h3>
+                                    <span class="text-red-500 font-bold">Nrs. ${dish.price}</span>
+                                </div>
+                                <div class="flex items-center gap-1 mt-1 mb-2">
+                                    <i class="fas fa-star text-red-500 text-xs"></i>
+                                    <span class="text-xs text-gray-300">${dish.rating}</span>
+                                </div>
+                                <p class="text-gray-400 text-xs mt-1 mb-3">${dish.desc}</p>
+                                <div class="flex items-center justify-between mt-auto">
+                                    <div class="flex items-center border border-gray-700 rounded-full bg-gray-900">
+                                        <button class="qty-btn dec-btn" data-id="${dish.id}">−</button>
+                                        <span class="mx-2 w-6 text-center quantity-display" id="qty-${dish.id}">0</span>
+                                        <button class="qty-btn inc-btn" data-id="${dish.id}">+</button>
+                                    </div>
+                                    <button class="add-to-cart-btn" data-id="${dish.id}" data-name="${dish.name}" data-price="${dish.price}" data-image="${dish.image}">
+                                        <i class="fas fa-cart-plus"></i> Add
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        container.appendChild(card);
+                    });
+                }
+                
+                countElement.textContent = `${dishes.length} Dishes Available`;
+                loadingSpinner.classList.add('hidden');
+            }, 300);
+        }
+        
+        function applyFilters() {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            if (loadingSpinner) loadingSpinner.classList.remove('hidden');
+            
+            let filtered = [...DISHES];
+            
+            if (appState.selectedCuisine !== 'all') {
+                filtered = filtered.filter(dish => 
+                    dish.category.toLowerCase() === appState.selectedCuisine.toLowerCase()
+                );
+            }
+            
+            if (appState.filters.showOffers) {
+                filtered = filtered.filter(dish => dish.offers && dish.offers.length > 0);
+            }
+            
+            const rating40 = document.getElementById('rating-4.0');
+            const rating35 = document.getElementById('rating-3.5');
+            const rating30 = document.getElementById('rating-3.0');
+            
+            const rating40Checked = rating40 ? rating40.checked : false;
+            const rating35Checked = rating35 ? rating35.checked : false;
+            const rating30Checked = rating30 ? rating30.checked : false;
+            
+            if (rating40Checked && !rating35Checked && !rating30Checked) {
+                filtered = filtered.filter(dish => dish.rating >= 4.0);
+            } else if (rating35Checked && !rating40Checked && !rating30Checked) {
+                filtered = filtered.filter(dish => dish.rating >= 3.5);
+            } else if (rating30Checked && !rating40Checked && !rating35Checked) {
+                filtered = filtered.filter(dish => dish.rating >= 3.0);
+            }
+            
+            filtered = filtered.filter(dish => 
+                dish.price <= appState.filters.maxPrice
+            );
+            
+            if (appState.filters.dietary.length > 0) {
+                filtered = filtered.filter(dish => 
+                    appState.filters.dietary.some(diet => 
+                        dish.dietary === diet
+                    )
+                );
+            }
+            
+            const popularityChecked = document.querySelector('.popularity-checkbox:checked');
+            if (popularityChecked && popularityChecked.value === 'popularity') {
+                filtered = filtered.filter(dish => dish.popular === true);
+            }
+            
+            if (appState.filters.priceSort === 'low-high') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (appState.filters.priceSort === 'high-low') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+            
+            appState.filteredDishes = filtered;
+            renderDishes();
+        }
+        
+        function clearFilters() {
+            document.querySelectorAll('.sort-checkbox').forEach(checkbox => {
+                checkbox.checked = checkbox.value === 'nearest';
+            });
+            
+            document.querySelectorAll('.dietary-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            const showOffersCheckbox = document.getElementById('show-offers');
+            if (showOffersCheckbox) showOffersCheckbox.checked = false;
+            
+            const rating40 = document.getElementById('rating-4.0');
+            const rating35 = document.getElementById('rating-3.5');
+            const rating30 = document.getElementById('rating-3.0');
+            
+            if (rating40) rating40.checked = true;
+            if (rating35) rating35.checked = false;
+            if (rating30) rating30.checked = false;
+            
+            const priceSlider = document.getElementById('price-range');
+            if (priceSlider) {
+                priceSlider.value = 2000;
+                const initialPercent = (2000 - priceSlider.min) / (priceSlider.max - priceSlider.min) * 100;
+                priceSlider.style.background = `linear-gradient(to right, #DC2626 0%, #DC2626 ${initialPercent}%, #333 ${initialPercent}%, #333 100%)`;
+                const currentPriceEl = document.getElementById('current-price');
+                if (currentPriceEl) currentPriceEl.textContent = 'Current: Nrs. 2000';
+                const priceTooltip = document.getElementById('price-tooltip');
+                if (priceTooltip) {
+                    priceTooltip.textContent = 'Nrs. 2000';
+                    priceTooltip.style.left = '100%';
+                }
+            }
+            
+            const priceLowHighBtn = document.getElementById('price-low-high');
+            const priceHighLowBtn = document.getElementById('price-high-low');
+            if (priceLowHighBtn && priceHighLowBtn) {
+                priceLowHighBtn.classList.remove('bg-red-500', 'text-white');
+                priceLowHighBtn.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+                priceHighLowBtn.classList.remove('bg-red-500', 'text-white');
+                priceHighLowBtn.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+            }
+            
+            appState.filters = {
+                sortBy: ['nearest'],
+                showOffers: false,
+                minRating: 4.0,
+                maxPrice: 2000,
+                dietary: [],
+                priceSort: null
+            };
+            
+            appState.selectedCuisine = 'all';
+            renderCuisines();
+            
+            applyFilters();
+        }
+        
+        function updateSortFilter() {
+            appState.filters.sortBy = Array.from(document.querySelectorAll('.sort-checkbox:checked'))
+                .map(checkbox => checkbox.value);
+        }
+        
+        function updateDietaryFilter() {
+            appState.filters.dietary = Array.from(document.querySelectorAll('.dietary-checkbox:checked'))
+                .map(checkbox => checkbox.value);
+        }
+        
+        function updateRatingFilter() {
+            const rating40 = document.getElementById('rating-4.0');
+            const rating35 = document.getElementById('rating-3.5');
+            const rating30 = document.getElementById('rating-3.0');
+            
+            const rating40Checked = rating40 ? rating40.checked : false;
+            const rating35Checked = rating35 ? rating35.checked : false;
+            const rating30Checked = rating30 ? rating30.checked : false;
+            
+            if (rating40Checked && !rating35Checked && !rating30Checked) {
+                appState.filters.minRating = 4.0;
+            } else if (rating35Checked && !rating40Checked && !rating30Checked) {
+                appState.filters.minRating = 3.5;
+            } else if (rating30Checked && !rating40Checked && !rating35Checked) {
+                appState.filters.minRating = 3.0;
+            } else {
+                appState.filters.minRating = 0;
+            }
+        }
+    </script>
+</body>
+</html>
